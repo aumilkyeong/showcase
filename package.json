@@ -1,0 +1,13 @@
+{
+  "name": "showcase",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint": "pnpm -r run lint",
+    "format": "pnpm -r run format",
+    "format:check": "pnpm -r run format:check"
+  }
+}

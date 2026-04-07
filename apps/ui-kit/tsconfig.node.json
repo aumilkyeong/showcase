@@ -1,0 +1,7 @@
+{
+  "extends": "@showcase/typescript-config/base",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["vite.config.ts"]
+}

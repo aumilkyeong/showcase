@@ -1,0 +1,63 @@
+{
+  "component": {
+    "noResults": "No results",
+    "loading": "Loading...",
+    "resultCount_one": "{{count}} result",
+    "resultCount_other": "{{count}} results"
+  },
+  "page": {
+    "title": "Autocomplete",
+    "description": "A combobox component that filters and suggests items as the user types. Supports keyboard navigation, custom rendering, and async data fetching.",
+    "demo": {
+      "sectionTitle": "Live Demo",
+      "basic": "Basic — local filtering",
+      "async": "Async — simulated API call (500ms delay)",
+      "custom": "Custom rendering — countries with flags",
+      "basicPlaceholder": "Search fruits...",
+      "asyncPlaceholder": "Type to search fruits (async)...",
+      "customPlaceholder": "Search countries..."
+    },
+    "api": {
+      "sectionTitle": "API Reference",
+      "headers": {
+        "prop": "Prop",
+        "type": "Type",
+        "default": "Default",
+        "description": "Description"
+      },
+      "descriptions": {
+        "items": "Array of items to filter",
+        "getItemLabel": "Extracts display text from item",
+        "onInputChange": "Called when input value changes (for async search)",
+        "onSelect": "Called when an item is selected",
+        "renderItem": "Custom render function for each item",
+        "placeholder": "Input placeholder text",
+        "maxResults": "Maximum number of displayed results",
+        "debounceMs": "Debounce delay in milliseconds",
+        "noResultsMessage": "Message shown when no items match",
+        "loading": "Shows loading indicator",
+        "disabled": "Disables the input"
+      }
+    },
+    "a11y": {
+      "sectionTitle": "Accessibility",
+      "description": "Follows the WAI-ARIA Combobox pattern. WCAG 2.1 AA compliant.",
+      "keyboard": "Keyboard Navigation",
+      "ariaAttributes": "ARIA Attributes",
+      "keys": {
+        "down": "Move to next option",
+        "up": "Move to previous option",
+        "enter": "Select highlighted option",
+        "escape": "Close the listbox"
+      },
+      "aria": {
+        "combobox": "Identifies the input as a combobox",
+        "expanded": "Indicates whether the listbox is open",
+        "activedescendant": "Points to the currently highlighted option",
+        "listbox": "Identifies the suggestion list",
+        "option": "Identifies each suggestion",
+        "selected": "Indicates the highlighted option"
+      }
+    }
+  }
+}

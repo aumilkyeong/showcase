@@ -18,3 +18,7 @@ i18n.use(initReactI18next).init({
   defaultNs: 'common',
   interpolation: { escapeValue: false },
 });
+
+beforeEach(async () => {
+  await i18n.changeLanguage('en');
+});

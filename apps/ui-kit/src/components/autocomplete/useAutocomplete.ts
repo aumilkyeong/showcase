@@ -34,10 +34,11 @@ export function useAutocomplete<T>({
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   const debouncedInput = useDebounce(inputValue, debounceMs);
+  const effectiveInput = debounceMs === 0 ? inputValue : debouncedInput;
 
   const filteredItems = useMemo(() => {
-    if (!debouncedInput) return [];
-    const query = debouncedInput.toLowerCase();
+    if (!effectiveInput) return [];
+    const query = effectiveInput.toLowerCase();
     return items
       .filter((item) => getItemLabel(item).toLowerCase().startsWith(query))
       .slice(0, maxResults);

@@ -90,7 +90,7 @@ export function Autocomplete<T>({
       {showListbox && (
         <ul id={listboxId} role="listbox" className={styles.listbox}>
           {loading ? (
-            <li role="status" className={styles.loading}>
+            <li className={styles.loading}>
               {t('component.loading')}
             </li>
           ) : showNoResults ? (
@@ -118,7 +118,7 @@ export function Autocomplete<T>({
         </ul>
       )}
 
-      <div role="log" aria-live="polite" className={styles.srOnly}>
+      <div role="status" aria-live="polite" className={styles.srOnly}>
         {showListbox && !loading && filteredItems.length > 0
           ? t('component.resultCount', { count: filteredItems.length })
           : ''}

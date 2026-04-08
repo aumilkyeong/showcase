@@ -42,7 +42,7 @@ export function useAutocomplete<T>({
     return items
       .filter((item) => getItemLabel(item).toLowerCase().startsWith(query))
       .slice(0, maxResults);
-  }, [debouncedInput, items, getItemLabel, maxResults]);
+  }, [effectiveInput, items, getItemLabel, maxResults]);
 
   const handleInputChange = useCallback(
     (value: string) => {

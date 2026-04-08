@@ -132,7 +132,7 @@ test('shows loading indicator when loading is true', async () => {
 
   await user.type(input, 'ap');
   await waitFor(() => {
-    expect(screen.getByRole('status')).toBeInTheDocument();
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
 
@@ -188,7 +188,7 @@ test('announces result count to screen readers', async () => {
   await user.type(input, 'ap');
 
   await waitFor(() => {
-    const liveRegion = screen.getByRole('log');
+    const liveRegion = screen.getByRole('status');
     expect(liveRegion).toHaveTextContent('2 results');
   });
 });

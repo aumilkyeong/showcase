@@ -1,4 +1,5 @@
 import { useRef, useId, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAutocomplete } from './useAutocomplete';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import styles from './Autocomplete.module.css';
@@ -26,10 +27,11 @@ export function Autocomplete<T>({
   placeholder,
   maxResults = 10,
   debounceMs = 300,
-  noResultsMessage = '결과 없음',
+  noResultsMessage,
   loading = false,
   disabled = false,
 }: AutocompleteProps<T>) {
+  const { t } = useTranslation('autocomplete');
   const id = useId();
   const listboxId = `${id}-listbox`;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,6 +59,7 @@ export function Autocomplete<T>({
 
   const showListbox = isOpen && !disabled;
   const showNoResults = showListbox && !loading && filteredItems.length === 0 && inputValue.length > 0;
+  const resolvedNoResults = noResultsMessage ?? t('component.noResults');
 
   function getOptionId(index: number) {
     return `${id}-option-${index}`;
@@ -88,10 +91,10 @@ export function Autocomplete<T>({
         <ul id={listboxId} role="listbox" className={styles.listbox}>
           {loading ? (
             <li role="status" className={styles.loading}>
-              Loading...
+              {t('component.loading')}
             </li>
           ) : showNoResults ? (
-            <li className={styles.noResults}>{noResultsMessage}</li>
+            <li className={styles.noResults}>{resolvedNoResults}</li>
           ) : (
             filteredItems.map((item, index) => (
               <li
@@ -117,7 +120,7 @@ export function Autocomplete<T>({
 
       <div role="log" aria-live="polite" className={styles.srOnly}>
         {showListbox && !loading && filteredItems.length > 0
-          ? `${filteredItems.length}개의 결과`
+          ? t('component.resultCount', { count: filteredItems.length })
           : ''}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import i18n from 'i18next';
 import { Autocomplete } from './Autocomplete';
 
 const items = ['Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry'];
@@ -135,7 +136,52 @@ test('shows loading indicator when loading is true', async () => {
   });
 });
 
+test('shows translated noResults message in English', async () => {
+  await i18n.changeLanguage('en');
+  const { user } = setup();
+  const input = screen.getByRole('combobox');
+
+  await user.type(input, 'xyz');
+  await waitFor(() => {
+    expect(screen.getByText('No results')).toBeInTheDocument();
+  });
+});
+
+test('shows translated noResults message in Korean', async () => {
+  await i18n.changeLanguage('ko');
+  const { user } = setup();
+  const input = screen.getByRole('combobox');
+
+  await user.type(input, 'xyz');
+  await waitFor(() => {
+    expect(screen.getByText('결과 없음')).toBeInTheDocument();
+  });
+});
+
+test('shows translated loading text', async () => {
+  await i18n.changeLanguage('en');
+  const { user } = setup({ loading: true });
+  const input = screen.getByRole('combobox');
+
+  await user.type(input, 'ap');
+  await waitFor(() => {
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+  });
+});
+
+test('props override i18n default for noResultsMessage', async () => {
+  await i18n.changeLanguage('en');
+  const { user } = setup({ noResultsMessage: 'Custom empty' });
+  const input = screen.getByRole('combobox');
+
+  await user.type(input, 'xyz');
+  await waitFor(() => {
+    expect(screen.getByText('Custom empty')).toBeInTheDocument();
+  });
+});
+
 test('announces result count to screen readers', async () => {
+  await i18n.changeLanguage('en');
   const { user } = setup();
   const input = screen.getByRole('combobox');
 
@@ -143,6 +189,6 @@ test('announces result count to screen readers', async () => {
 
   await waitFor(() => {
     const liveRegion = screen.getByRole('log');
-    expect(liveRegion).toHaveTextContent('2');
+    expect(liveRegion).toHaveTextContent('2 results');
   });
 });

@@ -20,6 +20,8 @@
     "react-router": "^7.5.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.52.0",
     "@showcase/eslint-config": "workspace:*",
     "@showcase/prettier-config": "workspace:*",
     "@showcase/typescript-config": "workspace:*",

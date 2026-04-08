@@ -1,0 +1,106 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.description {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.demo {
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #fafafa;
+  max-width: 400px;
+}
+
+.demoLabel {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.table th {
+  font-weight: 600;
+  background-color: #f9fafb;
+}
+
+.table code {
+  font-size: 13px;
+  background-color: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.kbdList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.kbdItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 13px;
+  font-family: monospace;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  min-width: 32px;
+  text-align: center;
+}
+
+.richItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.richItemEmoji {
+  font-size: 20px;
+}

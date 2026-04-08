@@ -47,3 +47,30 @@
   padding: 32px 48px;
   max-width: 960px;
 }
+
+.localeSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.localeLink {
+  text-decoration: none;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.localeLink:hover {
+  color: #1a56db;
+}
+
+.localeLinkActive {
+  color: #1a56db;
+  font-weight: 700;
+}
+
+.localeDivider {
+  color: #d1d5db;
+}

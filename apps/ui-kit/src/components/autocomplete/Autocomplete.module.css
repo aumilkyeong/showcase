@@ -7,20 +7,30 @@
   width: 100%;
   padding: 8px 12px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-family: inherit;
+  color: #f2f2f2;
+  background-color: #050507;
+  border: 1px solid #3d3a39;
+  border-radius: 6px;
   outline: none;
   box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input::placeholder {
+  color: #8b949e;
 }
 
 .input:focus {
-  border-color: #4a90d9;
-  box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.3);
+  border-color: #00d992;
+  box-shadow: 0 0 0 2px rgba(0, 217, 146, 0.25);
 }
 
 .input:disabled {
-  background-color: #f5f5f5;
+  background-color: #101010;
+  color: #8b949e;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .listbox {
@@ -31,10 +41,11 @@
   margin: 4px 0 0;
   padding: 0;
   list-style: none;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #101010;
+  border: 1px solid #3d3a39;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 20px 60px,
+    rgba(148, 163, 184, 0.1) 0px 0px 0px 1px inset;
   max-height: 240px;
   overflow-y: auto;
   z-index: 100;
@@ -43,24 +54,28 @@
 .option {
   padding: 8px 12px;
   cursor: pointer;
+  color: #b8b3b0;
+  transition: background-color 0.1s, color 0.1s;
 }
 
 .option:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f2f2f2;
 }
 
 .optionHighlighted {
-  background-color: #e8f0fe;
+  background-color: rgba(0, 217, 146, 0.1);
+  color: #f2f2f2;
 }
 
 .noResults {
   padding: 8px 12px;
-  color: #888;
+  color: #8b949e;
 }
 
 .loading {
   padding: 8px 12px;
-  color: #888;
+  color: #8b949e;
 }
 
 .srOnly {

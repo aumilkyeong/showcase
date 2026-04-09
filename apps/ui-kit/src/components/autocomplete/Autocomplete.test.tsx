@@ -104,7 +104,7 @@ test('aria-activedescendant updates on keyboard navigation', async () => {
   await user.keyboard('{ArrowDown}');
 
   const options = screen.getAllByRole('option');
-  expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
+  expect(input).toHaveAttribute('aria-activedescendant', options[0]?.id);
 });
 
 test('shows noResultsMessage when no matches', async () => {

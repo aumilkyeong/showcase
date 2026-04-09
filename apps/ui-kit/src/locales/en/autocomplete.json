@@ -5,59 +5,84 @@
     "resultCount_one": "{{count}} result",
     "resultCount_other": "{{count}} results"
   },
-  "page": {
+  "hero": {
+    "overline": "Component",
     "title": "Autocomplete",
-    "description": "A combobox component that filters and suggests items as the user types. Supports keyboard navigation, custom rendering, and async data fetching.",
-    "demo": {
-      "sectionTitle": "Live Demo",
-      "basic": "Basic — local filtering",
-      "async": "Async — simulated API call (500ms delay)",
-      "custom": "Custom rendering — countries with flags",
-      "basicPlaceholder": "Search fruits...",
-      "asyncPlaceholder": "Type to search fruits (async)...",
-      "customPlaceholder": "Search countries..."
+    "subtitle": "Type along each step and discover the design decisions behind the scenes."
+  },
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "Start by typing",
+      "description": "The most basic form. The list filters as you type.",
+      "hint": "Try typing \"a\"",
+      "placeholder": "Search fruits...",
+      "insight": "Setting debounceMs to 0 triggers instant filtering. For local data, zero-delay response feels natural."
     },
-    "api": {
-      "sectionTitle": "API Reference",
-      "headers": {
-        "prop": "Prop",
-        "type": "Type",
-        "default": "Default",
-        "description": "Description"
+    "async": {
+      "title": "While the network responds",
+      "description": "This simulates a real API call with 500ms latency. Watch how the loading state communicates progress.",
+      "hint": "Type slowly and observe the loading state",
+      "placeholder": "Search fruits (async)...",
+      "insight": "Debounce prevents unnecessary requests, while the loading state signals that the system is working."
+    },
+    "custom": {
+      "title": "Display it your way",
+      "description": "renderItem lets you fully customize each suggestion's appearance.",
+      "hint": "Notice how items display with their flags",
+      "placeholder": "Search countries...",
+      "insight": "renderItem extends beyond plain text — icons, images, badges, or any layout you need."
+    },
+    "keyboard": {
+      "title": "No mouse required",
+      "description": "Every interaction works with the keyboard alone. Try it in the demo above.",
+      "hint": "Type, then navigate with arrow keys and select with Enter",
+      "placeholder": "Navigate with keyboard...",
+      "keys": {
+        "down": "Next option",
+        "up": "Previous option",
+        "enter": "Select",
+        "escape": "Close"
       },
-      "descriptions": {
-        "items": "Array of items to filter",
-        "getItemLabel": "Extracts display text from item",
-        "onInputChange": "Called when input value changes (for async search)",
-        "onSelect": "Called when an item is selected",
-        "renderItem": "Custom render function for each item",
-        "placeholder": "Input placeholder text",
-        "maxResults": "Maximum number of displayed results",
-        "debounceMs": "Debounce delay in milliseconds",
-        "noResultsMessage": "Message shown when no items match",
-        "loading": "Shows loading indicator",
-        "disabled": "Disables the input"
-      }
+      "insight": "Keyboard navigation serves both power-user efficiency and motor-disability accessibility."
     },
     "a11y": {
-      "sectionTitle": "Accessibility",
-      "description": "Follows the WAI-ARIA Combobox pattern. WCAG 2.1 AA compliant.",
-      "keyboard": "Keyboard Navigation",
-      "ariaAttributes": "ARIA Attributes",
-      "keys": {
-        "down": "Move to next option",
-        "up": "Move to previous option",
-        "enter": "Select highlighted option",
-        "escape": "Close the listbox"
+      "title": "Beyond what you see",
+      "description": "Follows the WAI-ARIA Combobox pattern. Screen reader users get the same experience.",
+      "headers": {
+        "attribute": "Attribute",
+        "role": "Purpose"
       },
-      "aria": {
-        "combobox": "Identifies the input as a combobox",
-        "expanded": "Indicates whether the listbox is open",
-        "activedescendant": "Points to the currently highlighted option",
-        "listbox": "Identifies the suggestion list",
-        "option": "Identifies each suggestion",
-        "selected": "Indicates the highlighted option"
-      }
+      "attrs": {
+        "combobox": "Declares the input as a combobox linked to a suggestion list",
+        "expanded": "Communicates whether the list is open to screen readers",
+        "activedescendant": "Lets screen readers announce the currently focused option",
+        "listbox": "Identifies the suggestion list and each item's role",
+        "selected": "Identifies the currently highlighted option"
+      },
+      "insight": "Accessibility is not an add-on. ARIA attributes must be part of the design from the start so screen reader users experience the same flow."
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "headers": {
+      "prop": "Prop",
+      "type": "Type",
+      "default": "Default",
+      "description": "Description"
+    },
+    "descriptions": {
+      "items": "Array of items to filter",
+      "getItemLabel": "Extracts display text from item",
+      "onInputChange": "Called when input value changes (for async search)",
+      "onSelect": "Called when an item is selected",
+      "renderItem": "Custom render function for each item",
+      "placeholder": "Input placeholder text",
+      "maxResults": "Maximum number of displayed results",
+      "debounceMs": "Debounce delay in milliseconds",
+      "noResultsMessage": "Message shown when no items match",
+      "loading": "Shows loading indicator",
+      "disabled": "Disables the input"
     }
   }
 }

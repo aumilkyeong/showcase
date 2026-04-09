@@ -52,7 +52,7 @@ function AsyncDemo() {
       getItemLabel={(item) => item}
       onInputChange={handleInputChange}
       loading={loading}
-      placeholder={t('page.demo.asyncPlaceholder')}
+      placeholder={t('steps.async.placeholder')}
       debounceMs={300}
     />
   );
@@ -63,35 +63,61 @@ export default function AutocompletePage() {
 
   return (
     <div className={styles.page}>
-      <header>
-        <h2 className={styles.title}>{t('page.title')}</h2>
-        <p className={styles.description}>{t('page.description')}</p>
+      <header className={styles.hero}>
+        <p className={styles.overline}>{t('hero.overline')}</p>
+        <h2 className={styles.title}>{t('hero.title')}</h2>
+        <p className={styles.subtitle}>{t('hero.subtitle')}</p>
       </header>
 
-      <section className={styles.section}>
-        <h3 className={styles.sectionTitle}>{t('page.demo.sectionTitle')}</h3>
-
+      <section className={styles.step}>
+        <div className={styles.stepHeader}>
+          <span className={styles.stepNumber}>01</span>
+          <h3 className={styles.stepTitle}>{t('steps.basic.title')}</h3>
+        </div>
+        <p className={styles.stepDescription}>{t('steps.basic.description')}</p>
         <div className={styles.demo}>
-          <p className={styles.demoLabel}>{t('page.demo.basic')}</p>
+          <p className={styles.hint}>{t('steps.basic.hint')}</p>
           <Autocomplete
             items={fruits}
             getItemLabel={(item) => item}
-            placeholder={t('page.demo.basicPlaceholder')}
+            placeholder={t('steps.basic.placeholder')}
             debounceMs={0}
           />
         </div>
+        <div className={styles.insight}>
+          <span className={styles.insightLabel}>{t('insight')}</span>
+          <p className={styles.insightText}>{t('steps.basic.insight')}</p>
+        </div>
+      </section>
 
+      <section className={styles.step}>
+        <div className={styles.stepHeader}>
+          <span className={styles.stepNumber}>02</span>
+          <h3 className={styles.stepTitle}>{t('steps.async.title')}</h3>
+        </div>
+        <p className={styles.stepDescription}>{t('steps.async.description')}</p>
         <div className={styles.demo}>
-          <p className={styles.demoLabel}>{t('page.demo.async')}</p>
+          <p className={styles.hint}>{t('steps.async.hint')}</p>
           <AsyncDemo />
         </div>
+        <div className={styles.insight}>
+          <span className={styles.insightLabel}>{t('insight')}</span>
+          <p className={styles.insightText}>{t('steps.async.insight')}</p>
+        </div>
+      </section>
 
+      <section className={styles.step}>
+        <div className={styles.stepHeader}>
+          <span className={styles.stepNumber}>03</span>
+          <h3 className={styles.stepTitle}>{t('steps.custom.title')}</h3>
+        </div>
+        <p className={styles.stepDescription}>{t('steps.custom.description')}</p>
         <div className={styles.demo}>
-          <p className={styles.demoLabel}>{t('page.demo.custom')}</p>
+          <p className={styles.hint}>{t('steps.custom.hint')}</p>
           <Autocomplete
             items={countries}
             getItemLabel={(item) => item.name}
-            placeholder={t('page.demo.customPlaceholder')}
+            placeholder={t('steps.custom.placeholder')}
             debounceMs={0}
             renderItem={(item, highlighted) => (
               <div
@@ -104,17 +130,98 @@ export default function AutocompletePage() {
             )}
           />
         </div>
+        <div className={styles.insight}>
+          <span className={styles.insightLabel}>{t('insight')}</span>
+          <p className={styles.insightText}>{t('steps.custom.insight')}</p>
+        </div>
       </section>
 
-      <section className={styles.section}>
-        <h3 className={styles.sectionTitle}>{t('page.api.sectionTitle')}</h3>
+      <section className={styles.step}>
+        <div className={styles.stepHeader}>
+          <span className={styles.stepNumber}>04</span>
+          <h3 className={styles.stepTitle}>{t('steps.keyboard.title')}</h3>
+        </div>
+        <p className={styles.stepDescription}>{t('steps.keyboard.description')}</p>
+        <div className={styles.demo}>
+          <p className={styles.hint}>{t('steps.keyboard.hint')}</p>
+          <Autocomplete
+            items={fruits}
+            getItemLabel={(item) => item}
+            placeholder={t('steps.keyboard.placeholder')}
+            debounceMs={0}
+          />
+        </div>
+        <ul className={styles.kbdList}>
+          <li className={styles.kbdItem}>
+            <kbd className={styles.kbd}>↓</kbd> <span>{t('steps.keyboard.keys.down')}</span>
+          </li>
+          <li className={styles.kbdItem}>
+            <kbd className={styles.kbd}>↑</kbd> <span>{t('steps.keyboard.keys.up')}</span>
+          </li>
+          <li className={styles.kbdItem}>
+            <kbd className={styles.kbd}>Enter</kbd> <span>{t('steps.keyboard.keys.enter')}</span>
+          </li>
+          <li className={styles.kbdItem}>
+            <kbd className={styles.kbd}>Esc</kbd> <span>{t('steps.keyboard.keys.escape')}</span>
+          </li>
+        </ul>
+        <div className={styles.insight}>
+          <span className={styles.insightLabel}>{t('insight')}</span>
+          <p className={styles.insightText}>{t('steps.keyboard.insight')}</p>
+        </div>
+      </section>
+
+      <section className={styles.step}>
+        <div className={styles.stepHeader}>
+          <span className={styles.stepNumber}>05</span>
+          <h3 className={styles.stepTitle}>{t('steps.a11y.title')}</h3>
+        </div>
+        <p className={styles.stepDescription}>{t('steps.a11y.description')}</p>
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>{t('page.api.headers.prop')}</th>
-              <th>{t('page.api.headers.type')}</th>
-              <th>{t('page.api.headers.default')}</th>
-              <th>{t('page.api.headers.description')}</th>
+              <th>{t('steps.a11y.headers.attribute')}</th>
+              <th>{t('steps.a11y.headers.role')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>role=&quot;combobox&quot;</code></td>
+              <td>{t('steps.a11y.attrs.combobox')}</td>
+            </tr>
+            <tr>
+              <td><code>aria-expanded</code></td>
+              <td>{t('steps.a11y.attrs.expanded')}</td>
+            </tr>
+            <tr>
+              <td><code>aria-activedescendant</code></td>
+              <td>{t('steps.a11y.attrs.activedescendant')}</td>
+            </tr>
+            <tr>
+              <td><code>role=&quot;listbox&quot;</code> / <code>role=&quot;option&quot;</code></td>
+              <td>{t('steps.a11y.attrs.listbox')}</td>
+            </tr>
+            <tr>
+              <td><code>aria-selected</code></td>
+              <td>{t('steps.a11y.attrs.selected')}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div className={styles.insight}>
+          <span className={styles.insightLabel}>{t('insight')}</span>
+          <p className={styles.insightText}>{t('steps.a11y.insight')}</p>
+        </div>
+      </section>
+
+      <section className={styles.reference}>
+        <h3 className={styles.referenceTitle}>{t('api.title')}</h3>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>{t('api.headers.prop')}</th>
+              <th>{t('api.headers.type')}</th>
+              <th>{t('api.headers.default')}</th>
+              <th>{t('api.headers.description')}</th>
             </tr>
           </thead>
           <tbody>
@@ -122,131 +229,67 @@ export default function AutocompletePage() {
               <td><code>items</code></td>
               <td><code>T[]</code></td>
               <td>required</td>
-              <td>{t('page.api.descriptions.items')}</td>
+              <td>{t('api.descriptions.items')}</td>
             </tr>
             <tr>
               <td><code>getItemLabel</code></td>
               <td><code>{'(item: T) => string'}</code></td>
               <td>required</td>
-              <td>{t('page.api.descriptions.getItemLabel')}</td>
+              <td>{t('api.descriptions.getItemLabel')}</td>
             </tr>
             <tr>
               <td><code>onInputChange</code></td>
               <td><code>{'(value: string) => void'}</code></td>
               <td>-</td>
-              <td>{t('page.api.descriptions.onInputChange')}</td>
+              <td>{t('api.descriptions.onInputChange')}</td>
             </tr>
             <tr>
               <td><code>onSelect</code></td>
               <td><code>{'(item: T) => void'}</code></td>
               <td>-</td>
-              <td>{t('page.api.descriptions.onSelect')}</td>
+              <td>{t('api.descriptions.onSelect')}</td>
             </tr>
             <tr>
               <td><code>renderItem</code></td>
               <td><code>{'(item: T, highlighted: boolean) => ReactNode'}</code></td>
               <td>-</td>
-              <td>{t('page.api.descriptions.renderItem')}</td>
+              <td>{t('api.descriptions.renderItem')}</td>
             </tr>
             <tr>
               <td><code>placeholder</code></td>
               <td><code>string</code></td>
               <td>-</td>
-              <td>{t('page.api.descriptions.placeholder')}</td>
+              <td>{t('api.descriptions.placeholder')}</td>
             </tr>
             <tr>
               <td><code>maxResults</code></td>
               <td><code>number</code></td>
               <td><code>10</code></td>
-              <td>{t('page.api.descriptions.maxResults')}</td>
+              <td>{t('api.descriptions.maxResults')}</td>
             </tr>
             <tr>
               <td><code>debounceMs</code></td>
               <td><code>number</code></td>
               <td><code>300</code></td>
-              <td>{t('page.api.descriptions.debounceMs')}</td>
+              <td>{t('api.descriptions.debounceMs')}</td>
             </tr>
             <tr>
               <td><code>noResultsMessage</code></td>
               <td><code>string</code></td>
               <td><code>{`"${t('component.noResults')}"`}</code></td>
-              <td>{t('page.api.descriptions.noResultsMessage')}</td>
+              <td>{t('api.descriptions.noResultsMessage')}</td>
             </tr>
             <tr>
               <td><code>loading</code></td>
               <td><code>boolean</code></td>
               <td><code>false</code></td>
-              <td>{t('page.api.descriptions.loading')}</td>
+              <td>{t('api.descriptions.loading')}</td>
             </tr>
             <tr>
               <td><code>disabled</code></td>
               <td><code>boolean</code></td>
               <td><code>false</code></td>
-              <td>{t('page.api.descriptions.disabled')}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section className={styles.section}>
-        <h3 className={styles.sectionTitle}>{t('page.a11y.sectionTitle')}</h3>
-        <p>
-          {t('page.a11y.description')}
-        </p>
-        <h4>{t('page.a11y.keyboard')}</h4>
-        <ul className={styles.kbdList}>
-          <li className={styles.kbdItem}>
-            <kbd className={styles.kbd}>↓</kbd> <span>{t('page.a11y.keys.down')}</span>
-          </li>
-          <li className={styles.kbdItem}>
-            <kbd className={styles.kbd}>↑</kbd> <span>{t('page.a11y.keys.up')}</span>
-          </li>
-          <li className={styles.kbdItem}>
-            <kbd className={styles.kbd}>Enter</kbd> <span>{t('page.a11y.keys.enter')}</span>
-          </li>
-          <li className={styles.kbdItem}>
-            <kbd className={styles.kbd}>Esc</kbd> <span>{t('page.a11y.keys.escape')}</span>
-          </li>
-        </ul>
-        <h4>{t('page.a11y.ariaAttributes')}</h4>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Attribute</th>
-              <th>Element</th>
-              <th>Usage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>role="combobox"</code></td>
-              <td>Input</td>
-              <td>{t('page.a11y.aria.combobox')}</td>
-            </tr>
-            <tr>
-              <td><code>aria-expanded</code></td>
-              <td>Input</td>
-              <td>{t('page.a11y.aria.expanded')}</td>
-            </tr>
-            <tr>
-              <td><code>aria-activedescendant</code></td>
-              <td>Input</td>
-              <td>{t('page.a11y.aria.activedescendant')}</td>
-            </tr>
-            <tr>
-              <td><code>role="listbox"</code></td>
-              <td>List</td>
-              <td>{t('page.a11y.aria.listbox')}</td>
-            </tr>
-            <tr>
-              <td><code>role="option"</code></td>
-              <td>List item</td>
-              <td>{t('page.a11y.aria.option')}</td>
-            </tr>
-            <tr>
-              <td><code>aria-selected</code></td>
-              <td>List item</td>
-              <td>{t('page.a11y.aria.selected')}</td>
+              <td>{t('api.descriptions.disabled')}</td>
             </tr>
           </tbody>
         </table>

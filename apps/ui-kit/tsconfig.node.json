@@ -1,7 +1,9 @@
 {
   "extends": "@showcase/typescript-config/base",
   "compilerOptions": {
-    "noEmit": true
+    "composite": true,
+    "emitDeclarationOnly": true,
+    "types": ["node"]
   },
   "include": ["vite.config.ts"]
 }

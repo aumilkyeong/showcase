@@ -5,59 +5,84 @@
     "resultCount_one": "{{count}}개의 결과",
     "resultCount_other": "{{count}}개의 결과"
   },
-  "page": {
+  "hero": {
+    "overline": "Component",
     "title": "Autocomplete",
-    "description": "사용자가 입력하면 항목을 필터링하여 제안하는 combobox 컴포넌트입니다. 키보드 내비게이션, 커스텀 렌더링, 비동기 데이터 로딩을 지원합니다.",
-    "demo": {
-      "sectionTitle": "라이브 데모",
-      "basic": "기본 — 로컬 필터링",
-      "async": "비동기 — API 호출 시뮬레이션 (500ms 딜레이)",
-      "custom": "커스텀 렌더링 — 국기가 있는 국가 목록",
-      "basicPlaceholder": "과일 검색...",
-      "asyncPlaceholder": "과일 검색 (비동기)...",
-      "customPlaceholder": "국가 검색..."
+    "subtitle": "직접 타이핑하면서 각 단계의 설계 의도를 느껴보세요."
+  },
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "타이핑으로 시작하기",
+      "description": "가장 기본적인 형태입니다. 입력과 동시에 목록이 필터링됩니다.",
+      "hint": "\"a\"를 입력해보세요",
+      "placeholder": "과일 검색...",
+      "insight": "debounceMs를 0으로 설정하면 입력 즉시 필터링됩니다. 로컬 데이터에서는 지연 없는 반응이 자연스럽습니다."
     },
-    "api": {
-      "sectionTitle": "API 레퍼런스",
-      "headers": {
-        "prop": "Prop",
-        "type": "타입",
-        "default": "기본값",
-        "description": "설명"
+    "async": {
+      "title": "네트워크를 기다리는 동안",
+      "description": "실제 API 호출처럼 500ms 지연이 있습니다. 로딩 상태가 어떻게 표시되는지 확인해보세요.",
+      "hint": "천천히 타이핑하면서 로딩 상태를 관찰해보세요",
+      "placeholder": "과일 검색 (비동기)...",
+      "insight": "debounce가 불필요한 요청을 막고, loading 상태가 사용자에게 시스템이 동작 중임을 알립니다."
+    },
+    "custom": {
+      "title": "내 방식대로 보여주기",
+      "description": "renderItem으로 각 항목의 모습을 자유롭게 바꿀 수 있습니다.",
+      "hint": "국기와 함께 표시되는 항목을 확인해보세요",
+      "placeholder": "국가 검색...",
+      "insight": "renderItem은 단순 텍스트를 넘어, 아이콘, 이미지, 뱃지 등 어떤 형태로든 확장할 수 있습니다."
+    },
+    "keyboard": {
+      "title": "마우스 없이도",
+      "description": "키보드만으로 모든 조작이 가능합니다. 위의 데모에서 직접 시도해보세요.",
+      "hint": "입력 후 방향키로 탐색, Enter로 선택해보세요",
+      "placeholder": "키보드로 탐색...",
+      "keys": {
+        "down": "다음 옵션",
+        "up": "이전 옵션",
+        "enter": "선택",
+        "escape": "닫기"
       },
-      "descriptions": {
-        "items": "필터링할 아이템 배열",
-        "getItemLabel": "아이템에서 표시 텍스트를 추출",
-        "onInputChange": "입력값 변경 시 호출 (비동기 검색용)",
-        "onSelect": "아이템 선택 시 호출",
-        "renderItem": "각 아이템의 커스텀 렌더링 함수",
-        "placeholder": "입력 필드 placeholder 텍스트",
-        "maxResults": "표시할 최대 결과 수",
-        "debounceMs": "디바운스 지연 시간 (밀리초)",
-        "noResultsMessage": "매칭 결과 없을 때 표시할 메시지",
-        "loading": "로딩 인디케이터 표시",
-        "disabled": "입력 비활성화"
-      }
+      "insight": "키보드 내비게이션은 파워 유저의 효율성과 운동 장애 사용자의 접근성을 동시에 보장합니다."
     },
     "a11y": {
-      "sectionTitle": "접근성",
-      "description": "WAI-ARIA Combobox 패턴을 따릅니다. WCAG 2.1 AA 준수.",
-      "keyboard": "키보드 내비게이션",
-      "ariaAttributes": "ARIA 속성",
-      "keys": {
-        "down": "다음 옵션으로 이동",
-        "up": "이전 옵션으로 이동",
-        "enter": "하이라이트된 옵션 선택",
-        "escape": "목록 닫기"
+      "title": "보이지 않는 곳까지",
+      "description": "WAI-ARIA Combobox 패턴을 준수합니다. 스크린 리더 사용자도 동일한 경험을 할 수 있습니다.",
+      "headers": {
+        "attribute": "속성",
+        "role": "역할"
       },
-      "aria": {
-        "combobox": "입력을 combobox로 식별",
-        "expanded": "목록 열림 여부 표시",
-        "activedescendant": "현재 하이라이트된 옵션을 가리킴",
-        "listbox": "제안 목록을 식별",
-        "option": "각 제안 항목을 식별",
-        "selected": "하이라이트된 옵션을 표시"
-      }
+      "attrs": {
+        "combobox": "입력 필드가 자동완성 목록과 연결된 combobox임을 선언합니다",
+        "expanded": "목록이 열려 있는지 여부를 스크린 리더에 전달합니다",
+        "activedescendant": "현재 포커스된 옵션을 스크린 리더가 읽을 수 있게 합니다",
+        "listbox": "제안 목록과 각 항목의 역할을 명시합니다",
+        "selected": "현재 하이라이트된 옵션을 식별합니다"
+      },
+      "insight": "접근성은 부가 기능이 아닙니다. ARIA 속성이 처음부터 설계에 포함되어야 스크린 리더 사용자도 동일한 흐름을 경험합니다."
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "headers": {
+      "prop": "Prop",
+      "type": "타입",
+      "default": "기본값",
+      "description": "설명"
+    },
+    "descriptions": {
+      "items": "필터링할 아이템 배열",
+      "getItemLabel": "아이템에서 표시 텍스트를 추출",
+      "onInputChange": "입력값 변경 시 호출 (비동기 검색용)",
+      "onSelect": "아이템 선택 시 호출",
+      "renderItem": "각 아이템의 커스텀 렌더링 함수",
+      "placeholder": "입력 필드 placeholder 텍스트",
+      "maxResults": "표시할 최대 결과 수",
+      "debounceMs": "디바운스 지연 시간 (밀리초)",
+      "noResultsMessage": "매칭 결과 없을 때 표시할 메시지",
+      "loading": "로딩 인디케이터 표시",
+      "disabled": "입력 비활성화"
     }
   }
 }

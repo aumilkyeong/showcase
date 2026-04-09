@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init({
   lng: 'en',
   fallbackLng: 'en',
   ns: ['common', 'autocomplete'],
-  defaultNs: 'common',
+  defaultNS: 'common',
   interpolation: { escapeValue: false },
 });
 

@@ -1,7 +1,25 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 64px;
+}
+
+/* Hero */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.overline {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2.52px;
+  text-transform: uppercase;
+  color: #00d992;
+  margin: 0;
 }
 
 .title {
@@ -14,20 +32,43 @@
   margin: 0;
 }
 
-.description {
+.subtitle {
   font-size: 16px;
-  color: #b8b3b0;
-  margin: 8px 0 0;
+  color: #8b949e;
+  margin: 4px 0 0;
   line-height: 1.65;
+  max-width: 520px;
 }
 
-.section {
+/* Step */
+
+.step {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-left: 24px;
+  border-left: 1px solid #3d3a39;
 }
 
-.sectionTitle {
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepNumber {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00d992;
+  background-color: rgba(0, 217, 146, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.stepTitle {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   font-size: 24px;
   font-weight: 700;
@@ -36,6 +77,15 @@
   color: #f2f2f2;
   margin: 0;
 }
+
+.stepDescription {
+  font-size: 15px;
+  color: #b8b3b0;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Demo */
 
 .demo {
   padding: 24px;
@@ -46,12 +96,78 @@
   box-shadow: rgba(92, 88, 85, 0.2) 0px 0px 15px;
 }
 
-.demoLabel {
-  font-size: 14px;
+.hint {
+  font-size: 13px;
   font-weight: 500;
-  color: #8b949e;
-  margin: 0 0 8px;
+  color: #00d992;
+  margin: 0 0 12px;
+  letter-spacing: 0.2px;
 }
+
+/* Insight */
+
+.insight {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: rgba(0, 217, 146, 0.04);
+  border: 1px solid rgba(0, 217, 146, 0.12);
+  border-radius: 6px;
+  max-width: 520px;
+}
+
+.insightLabel {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #00d992;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.insightText {
+  font-size: 14px;
+  color: #b8b3b0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Keyboard */
+
+.kbdList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.kbdItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #8b949e;
+}
+
+.kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  background-color: #101010;
+  border: 1px solid #3d3a39;
+  border-radius: 4px;
+  min-width: 28px;
+  text-align: center;
+  color: #f2f2f2;
+}
+
+/* Table */
 
 .table {
   width: 100%;
@@ -83,35 +199,27 @@
   border-radius: 4px;
 }
 
-.kbdList {
+/* Reference */
+
+.reference {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0;
-  list-style: none;
+  gap: 16px;
+  padding-top: 32px;
+  border-top: 1px solid #3d3a39;
 }
 
-.kbdItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 14px;
-  color: #b8b3b0;
+.referenceTitle {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+  color: #8b949e;
+  margin: 0;
 }
 
-.kbd {
-  display: inline-block;
-  padding: 2px 8px;
-  font-size: 13px;
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
-  background-color: #101010;
-  border: 1px solid #3d3a39;
-  border-radius: 4px;
-  min-width: 32px;
-  text-align: center;
-  color: #f2f2f2;
-}
+/* Rich item */
 
 .richItem {
   display: flex;

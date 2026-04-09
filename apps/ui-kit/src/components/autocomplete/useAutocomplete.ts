@@ -99,7 +99,7 @@ export function useAutocomplete<T>({
         case 'Enter': {
           event.preventDefault();
           if (highlightedIndex >= 0 && highlightedIndex < filteredItems.length) {
-            selectItem(filteredItems[highlightedIndex]);
+            selectItem(filteredItems[highlightedIndex]!);
           }
           break;
         }

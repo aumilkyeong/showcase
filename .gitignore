@@ -5,6 +5,9 @@ dist/
 .env
 .env.*
 !.env.example
+*.tsbuildinfo
+*.d.ts.map
+vite.config.d.ts
 .claude/
 .playwright-mcp/
 docs/

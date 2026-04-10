@@ -51,7 +51,9 @@ export function useModalDialog({
     if (!isOpen) return;
 
     previousFocusRef.current = document.activeElement as HTMLElement;
-    modalStack.push(id);
+    if (!modalStack.includes(id)) {
+      modalStack.push(id);
+    }
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 

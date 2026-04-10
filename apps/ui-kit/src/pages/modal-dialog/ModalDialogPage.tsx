@@ -33,6 +33,7 @@ function BasicDemo() {
         <ModalDialog
           isOpen={controlledOpen}
           onClose={() => setControlledOpen(false)}
+          closeLabel={t('closeLabel')}
         >
           <ModalDialog.Header>{t('steps.basic.controlledTitle')}</ModalDialog.Header>
           <ModalDialog.Body>{t('steps.basic.controlledBody')}</ModalDialog.Body>
@@ -50,7 +51,7 @@ function BasicDemo() {
         <p className={styles.comparisonLabel}>
           {t('steps.basic.uncontrolledLabel')}
         </p>
-        <ModalDialog>
+        <ModalDialog closeLabel={t('closeLabel')}>
           <ModalDialog.Trigger>
             <button className={styles.demoButton}>
               {t('steps.basic.openUncontrolled')}
@@ -141,7 +142,7 @@ function CompositionDemo() {
       <button className={styles.demoButton} onClick={() => setOpen(true)}>
         {t('steps.composition.openModal')}
       </button>
-      <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
+      <ModalDialog isOpen={open} onClose={() => setOpen(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.composition.modalTitle')}</ModalDialog.Header>
         <ModalDialog.Body>{t('steps.composition.body')}</ModalDialog.Body>
         <ModalDialog.Footer>
@@ -231,7 +232,7 @@ function PortalDemo() {
             {t('steps.portal.withPortal')}
           </button>
         </div>
-        <ModalDialog isOpen={portalOpen} onClose={() => setPortalOpen(false)}>
+        <ModalDialog isOpen={portalOpen} onClose={() => setPortalOpen(false)} closeLabel={t('closeLabel')}>
           <ModalDialog.Header>{t('steps.portal.modalTitle')}</ModalDialog.Header>
           <ModalDialog.Body>{t('steps.portal.body')}</ModalDialog.Body>
           <ModalDialog.Footer>
@@ -266,7 +267,7 @@ function FocusTrapDemo() {
       <button className={styles.demoButton} onClick={() => setOpen(true)}>
         {t('steps.focusTrap.open')}
       </button>
-      <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
+      <ModalDialog isOpen={open} onClose={() => setOpen(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.focusTrap.modalTitle')}</ModalDialog.Header>
         <ModalDialog.Body>
           <div onFocusCapture={handleFocusCapture}>
@@ -308,7 +309,7 @@ function AnimationDemo() {
       <button className={styles.demoButton} onClick={() => setOpen(true)}>
         {t('steps.animation.open')}
       </button>
-      <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
+      <ModalDialog isOpen={open} onClose={() => setOpen(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.animation.modalTitle')}</ModalDialog.Header>
         <ModalDialog.Body>{t('steps.animation.body')}</ModalDialog.Body>
         <ModalDialog.Footer>
@@ -340,7 +341,7 @@ function NativeDialogDemo() {
         >
           {t('steps.nativeDialog.openCustom')}
         </button>
-        <ModalDialog isOpen={customOpen} onClose={() => setCustomOpen(false)} width={360}>
+        <ModalDialog isOpen={customOpen} onClose={() => setCustomOpen(false)} width={360} closeLabel={t('closeLabel')}>
           <ModalDialog.Header>{t('steps.nativeDialog.modalTitle')}</ModalDialog.Header>
           <ModalDialog.Body>
             <label className={styles.demoLabel}>{t('steps.nativeDialog.input1')}</label>
@@ -374,6 +375,10 @@ function NativeDialogDemo() {
             color: '#f2f2f2',
             padding: 20,
             maxWidth: 360,
+            margin: 'auto',
+            position: 'fixed',
+            inset: 0,
+            height: 'fit-content',
           }}
         >
           <h3 style={{ margin: '0 0 16px', fontSize: 16 }}>
@@ -417,7 +422,7 @@ function StackedDemo() {
           {t('steps.stacked.stackDepth', { depth })}
         </p>
       )}
-      <ModalDialog isOpen={open1} onClose={() => setOpen1(false)}>
+      <ModalDialog isOpen={open1} onClose={() => setOpen1(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.stacked.title1')}</ModalDialog.Header>
         <ModalDialog.Body>
           <p>{t('steps.stacked.body1')}</p>
@@ -431,7 +436,7 @@ function StackedDemo() {
           </button>
         </ModalDialog.Footer>
       </ModalDialog>
-      <ModalDialog isOpen={open2} onClose={() => setOpen2(false)}>
+      <ModalDialog isOpen={open2} onClose={() => setOpen2(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.stacked.title2')}</ModalDialog.Header>
         <ModalDialog.Body>
           <p>{t('steps.stacked.body2')}</p>
@@ -445,7 +450,7 @@ function StackedDemo() {
           </button>
         </ModalDialog.Footer>
       </ModalDialog>
-      <ModalDialog isOpen={open3} onClose={() => setOpen3(false)}>
+      <ModalDialog isOpen={open3} onClose={() => setOpen3(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.stacked.title3')}</ModalDialog.Header>
         <ModalDialog.Body>{t('steps.stacked.body3')}</ModalDialog.Body>
         <ModalDialog.Footer>
@@ -469,7 +474,7 @@ function KeyboardDemo() {
       <button className={styles.demoButton} onClick={() => setOpen(true)}>
         {t('steps.keyboard.open')}
       </button>
-      <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
+      <ModalDialog isOpen={open} onClose={() => setOpen(false)} closeLabel={t('closeLabel')}>
         <ModalDialog.Header>{t('steps.keyboard.modalTitle')}</ModalDialog.Header>
         <ModalDialog.Body>{t('steps.keyboard.body')}</ModalDialog.Body>
         <ModalDialog.Footer>
@@ -666,22 +671,22 @@ export default function ModalDialogPage() {
           <tbody>
             <tr>
               <td><code>role=&quot;dialog&quot;</code></td>
-              <td>Modal container</td>
+              <td>{t('steps.a11y.modalContainer')}</td>
               <td>{t('steps.a11y.attrs.dialog')}</td>
             </tr>
             <tr>
               <td><code>aria-modal=&quot;true&quot;</code></td>
-              <td>Modal container</td>
+              <td>{t('steps.a11y.modalContainer')}</td>
               <td>{t('steps.a11y.attrs.modal')}</td>
             </tr>
             <tr>
               <td><code>aria-labelledby</code></td>
-              <td>Modal container</td>
+              <td>{t('steps.a11y.modalContainer')}</td>
               <td>{t('steps.a11y.attrs.labelledby')}</td>
             </tr>
             <tr>
               <td><code>aria-describedby</code></td>
-              <td>Modal container</td>
+              <td>{t('steps.a11y.modalContainer')}</td>
               <td>{t('steps.a11y.attrs.describedby')}</td>
             </tr>
           </tbody>

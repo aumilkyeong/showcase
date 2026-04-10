@@ -26,6 +26,7 @@ interface ModalDialogRootProps extends UseModalDialogOptions {
   children: ReactNode;
   width?: CSSProperties['width'];
   maxHeight?: CSSProperties['maxHeight'];
+  closeLabel?: string;
   className?: string;
 }
 
@@ -33,6 +34,7 @@ function ModalDialogRoot({
   children,
   width,
   maxHeight,
+  closeLabel = 'Close dialog',
   className,
   ...options
 }: ModalDialogRootProps) {
@@ -75,6 +77,7 @@ function ModalDialogRoot({
       closeOnOverlayClick: state.closeOnOverlayClick,
       closeOnEsc: state.closeOnEsc,
       containerRef: state.containerRef,
+      closeLabel,
       handleOpen: state.handleOpen,
       handleClose: state.handleClose,
     }),
@@ -85,6 +88,7 @@ function ModalDialogRoot({
       state.closeOnOverlayClick,
       state.closeOnEsc,
       state.containerRef,
+      closeLabel,
       state.handleOpen,
       state.handleClose,
     ],
@@ -179,7 +183,7 @@ function Header({ children, showCloseButton = true, className }: HeaderProps) {
         <button
           type="button"
           className={styles.closeButton}
-          aria-label="Close dialog"
+          aria-label={ctx.closeLabel}
           onClick={ctx.handleClose}
         >
           ×

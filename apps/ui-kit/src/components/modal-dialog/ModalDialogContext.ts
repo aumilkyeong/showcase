@@ -7,6 +7,7 @@ export interface ModalDialogContextValue {
   closeOnOverlayClick: boolean;
   closeOnEsc: boolean;
   containerRef: React.RefObject<HTMLDivElement | null>;
+  closeLabel: string;
   handleOpen: () => void;
   handleClose: () => void;
 }

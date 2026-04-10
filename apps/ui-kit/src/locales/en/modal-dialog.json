@@ -4,6 +4,7 @@
     "title": "Modal Dialog",
     "subtitle": "Open and close modals, and discover the design intent behind each step."
   },
+  "closeLabel": "Close dialog",
   "insight": "Design Point",
   "steps": {
     "basic": {
@@ -125,6 +126,7 @@
         "element": "Element",
         "role": "Purpose"
       },
+      "modalContainer": "Modal container",
       "attrs": {
         "dialog": "Declares the dialog role",
         "modal": "Communicates modal mode to screen readers",

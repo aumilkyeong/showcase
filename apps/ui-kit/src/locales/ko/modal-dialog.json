@@ -4,6 +4,7 @@
     "title": "Modal Dialog",
     "subtitle": "모달을 열고 닫으며, 각 단계에 담긴 설계 의도를 발견해보세요."
   },
+  "closeLabel": "다이얼로그 닫기",
   "insight": "Design Point",
   "steps": {
     "basic": {
@@ -125,6 +126,7 @@
         "element": "요소",
         "role": "용도"
       },
+      "modalContainer": "모달 컨테이너",
       "attrs": {
         "dialog": "다이얼로그 역할을 선언합니다",
         "modal": "모달 모드임을 스크린 리더에 전달합니다",

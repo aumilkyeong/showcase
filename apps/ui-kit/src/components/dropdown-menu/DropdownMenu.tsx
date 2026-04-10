@@ -179,7 +179,12 @@ function List({ children }: ListProps) {
         : enabledItems[0];
     target?.focus();
     ctx.setInitialFocusPosition(null);
-  }, [ctx.isOpen, ctx.listRef, ctx.initialFocusPosition, ctx.setInitialFocusPosition]);
+  }, [
+    ctx.isOpen,
+    ctx.listRef,
+    ctx.initialFocusPosition,
+    ctx.setInitialFocusPosition,
+  ]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
     const list = ctx.listRef.current;

@@ -48,10 +48,7 @@ export function useDropdownMenu({ strategy }: UseDropdownMenuOptions) {
     [close],
   );
 
-  const getItemId = useCallback(
-    (index: number) => `${id}-item-${index}`,
-    [id],
-  );
+  const getItemId = useCallback((index: number) => `${id}-item-${index}`, [id]);
 
   const registerItem = useCallback((index: number, disabled: boolean) => {
     setItemRegistry((prev) => {

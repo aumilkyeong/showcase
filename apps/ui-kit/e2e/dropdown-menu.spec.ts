@@ -7,8 +7,12 @@ test.describe('Dropdown Menu (ko)', () => {
   });
 
   test('page loads with Korean text', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'Dropdown Menu' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Actions' }).first()).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Dropdown Menu' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Actions' }).first(),
+    ).toBeVisible();
   });
 
   test('basic demo: click to open, select item', async ({ page }) => {
@@ -55,8 +59,12 @@ test.describe('Dropdown Menu (en)', () => {
   });
 
   test('page loads with English text', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'Dropdown Menu' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Actions' }).first()).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Dropdown Menu' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Actions' }).first(),
+    ).toBeVisible();
   });
 
   test('basic demo: select item shows English text', async ({ page }) => {

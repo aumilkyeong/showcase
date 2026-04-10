@@ -75,7 +75,7 @@ describe('ImageCarousel', () => {
   it('clicking a dot navigates to that slide', async () => {
     const { user } = setup();
     const tabs = screen.getAllByRole('tab');
-    await user.click(tabs[2]);
+    await user.click(tabs[2]!);
     expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
   });
 

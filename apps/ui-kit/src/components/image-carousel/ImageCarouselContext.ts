@@ -24,7 +24,6 @@ export type CarouselAction =
 export interface ImageCarouselContextValue {
   images: ImageData[];
   loop: boolean;
-  transitionDuration: number;
   width: number;
   height: number;
   autoplay: boolean;
@@ -32,6 +31,8 @@ export interface ImageCarouselContextValue {
   state: CarouselState;
   dispatch: Dispatch<CarouselAction>;
   viewportRef: RefObject<HTMLDivElement | null>;
+  _onPrevClick?: () => void;
+  _onNextClick?: () => void;
 }
 
 export const ImageCarouselContext =

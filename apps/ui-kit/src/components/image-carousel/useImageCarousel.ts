@@ -1,10 +1,9 @@
-import { useReducer, useRef, useCallback, useEffect } from 'react';
+import { useReducer, useRef, useMemo, useEffect } from 'react';
 import type { CarouselState, CarouselAction, ImageData } from './ImageCarouselContext';
 
 interface UseImageCarouselOptions {
   images: ImageData[];
   loop: boolean;
-  transitionDuration: number;
   width: number;
   height: number;
   autoplay: boolean;
@@ -58,16 +57,14 @@ const initialState: CarouselState = {
 export function useImageCarousel({
   images,
   loop,
-  transitionDuration,
   width,
   height,
   autoplay,
   delay,
 }: UseImageCarouselOptions) {
   const viewportRef = useRef<HTMLDivElement>(null);
-  const reducer = useCallback(
-    (state: CarouselState, action: CarouselAction) =>
-      createReducer(images.length, loop)(state, action),
+  const reducer = useMemo(
+    () => createReducer(images.length, loop),
     [images.length, loop],
   );
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -97,7 +94,7 @@ export function useImageCarousel({
   useEffect(() => {
     if (state.intent === 'hover') {
       const nextIdx = (state.currentIndex + 1) % images.length;
-      if (!state.loadedIndices.has(nextIdx)) {
+      if (!state.loadedIndices.has(nextIdx) && images[nextIdx]) {
         const img = new Image();
         img.src = images[nextIdx].src;
         img.onload = () => dispatch({ type: 'IMAGE_LOADED', index: nextIdx });
@@ -105,7 +102,7 @@ export function useImageCarousel({
     } else if (state.intent === 'active') {
       for (let i = 1; i <= 3; i++) {
         const idx = (state.currentIndex + i) % images.length;
-        if (!state.loadedIndices.has(idx)) {
+        if (!state.loadedIndices.has(idx) && images[idx]) {
           const img = new Image();
           img.src = images[idx].src;
           img.onload = () => dispatch({ type: 'IMAGE_LOADED', index: idx });
@@ -120,7 +117,6 @@ export function useImageCarousel({
     viewportRef,
     images,
     loop,
-    transitionDuration,
     width,
     height,
     autoplay,

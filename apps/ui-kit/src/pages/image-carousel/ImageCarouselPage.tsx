@@ -171,8 +171,8 @@ function AutoplayDemo() {
 
 function PerformanceDemo() {
   const { t } = useTranslation('image-carousel');
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedSet, setLoadedSet] = useState<Set<number>>(new Set([0]));
+  const [preloadingSet, setPreloadingSet] = useState<Set<number>>(new Set());
 
   const manyImages = Array.from({ length: 10 }, (_, i) => ({
     src: `https://picsum.photos/id/${(i + 1) * 10}/600/400`,
@@ -180,15 +180,31 @@ function PerformanceDemo() {
   }));
 
   const handlePageSelect = (index: number) => {
-    setCurrentIndex(index);
-    setLoadedSet((prev) => {
-      const next = new Set(prev);
-      next.add(index);
-      for (let i = 1; i <= 3; i++) {
-        next.add((index + i) % manyImages.length);
+    setLoadedSet((prev) => new Set([...prev, index]));
+
+    const nextPreloading = new Set<number>();
+    for (let i = 1; i <= 3; i++) {
+      const idx = (index + i) % manyImages.length;
+      if (!loadedSet.has(idx)) {
+        nextPreloading.add(idx);
       }
-      return next;
-    });
+    }
+    setPreloadingSet(nextPreloading);
+
+    setTimeout(() => {
+      setLoadedSet((prev) => {
+        const next = new Set(prev);
+        nextPreloading.forEach((idx) => next.add(idx));
+        return next;
+      });
+      setPreloadingSet(new Set());
+    }, 600);
+  };
+
+  const getSegmentClass = (i: number) => {
+    if (loadedSet.has(i)) return `${styles.loadingSegment} ${styles.loadingSegmentLoaded}`;
+    if (preloadingSet.has(i)) return `${styles.loadingSegment} ${styles.loadingSegmentPreloading}`;
+    return styles.loadingSegment;
   };
 
   return (
@@ -206,12 +222,7 @@ function PerformanceDemo() {
       </ImageCarousel>
       <div className={styles.loadingBar}>
         {manyImages.map((_, i) => (
-          <div
-            key={i}
-            className={`${styles.loadingSegment} ${
-              loadedSet.has(i) ? styles.loadingSegmentLoaded : ''
-            }`}
-          />
+          <div key={i} className={getSegmentClass(i)} />
         ))}
       </div>
       <div className={styles.legend}>
@@ -492,12 +503,6 @@ export default function ImageCarouselPage() {
               <td><code>number</code></td>
               <td><code>400</code></td>
               <td>{t('api.descriptions.height')}</td>
-            </tr>
-            <tr>
-              <td><code>transitionDuration</code></td>
-              <td><code>number</code></td>
-              <td><code>300</code></td>
-              <td>{t('api.descriptions.transitionDuration')}</td>
             </tr>
             <tr>
               <td><code>loop</code></td>

@@ -93,7 +93,7 @@
       "images": "Array of image data ({ src, alt, srcSet? })",
       "width": "Carousel width (px)",
       "height": "Carousel height (px)",
-      "transitionDuration": "Slide transition animation duration (ms)",
+
       "loop": "Wrap around from last slide to first",
       "autoplay": "Enable automatic playback",
       "delay": "Autoplay interval (ms)",

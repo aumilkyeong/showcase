@@ -93,7 +93,7 @@
       "images": "이미지 데이터 배열 ({ src, alt, srcSet? })",
       "width": "캐러셀 너비 (px)",
       "height": "캐러셀 높이 (px)",
-      "transitionDuration": "슬라이드 전환 애니메이션 시간 (ms)",
+
       "loop": "마지막 슬라이드에서 처음으로 순환",
       "autoplay": "자동 재생 활성화",
       "delay": "자동 재생 간격 (ms)",

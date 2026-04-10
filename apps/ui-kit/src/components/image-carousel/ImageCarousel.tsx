@@ -1,4 +1,4 @@
-import { type ReactNode, useMemo, useEffect } from 'react';
+import { type ReactNode, useMemo, useEffect, useRef } from 'react';
 import {
   ImageCarouselContext,
   useImageCarouselContext,
@@ -13,7 +13,6 @@ interface ImageCarouselRootProps {
   images: ImageData[];
   width?: number;
   height?: number;
-  transitionDuration?: number;
   loop?: boolean;
   autoplay?: boolean;
   delay?: number;
@@ -28,7 +27,6 @@ function ImageCarouselRoot({
   images,
   width = 600,
   height = 400,
-  transitionDuration = 300,
   loop = true,
   autoplay = false,
   delay = 3000,
@@ -41,19 +39,27 @@ function ImageCarouselRoot({
   const hookValue = useImageCarousel({
     images,
     loop,
-    transitionDuration,
     width,
     height,
     autoplay,
     delay,
   });
 
+  const isMountedRef = useRef(false);
+  const onLoadCalledRef = useRef(false);
+
   useEffect(() => {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      return;
+    }
     onPageSelect?.(hookValue.state.currentIndex);
   }, [hookValue.state.currentIndex, onPageSelect]);
 
   useEffect(() => {
+    if (onLoadCalledRef.current) return;
     if (hookValue.state.loadedIndices.has(0)) {
+      onLoadCalledRef.current = true;
       onLoad?.();
     }
   }, [hookValue.state.loadedIndices, onLoad]);
@@ -128,7 +134,7 @@ function ImageCarouselRoot({
 
 function Viewport() {
   const ctx = useImageCarouselContext();
-  const { images, width, height, state, dispatch, viewportRef, autoplay } = ctx;
+  const { images, width, height, dispatch, viewportRef, autoplay } = ctx;
 
   return (
     <div
@@ -174,7 +180,7 @@ function Prev({ 'aria-label': ariaLabel = '이전 이미지' }: NavButtonProps) 
   const handleClick = () => {
     dispatch({ type: 'PREV_IMAGE' });
     dispatch({ type: 'SET_INTENT', intent: 'active' });
-    (ctx as any)._onPrevClick?.();
+    ctx._onPrevClick?.();
   };
 
   return (
@@ -201,7 +207,7 @@ function Next({ 'aria-label': ariaLabel = '다음 이미지' }: NavButtonProps) 
   const handleClick = () => {
     dispatch({ type: 'NEXT_IMAGE' });
     dispatch({ type: 'SET_INTENT', intent: 'active' });
-    (ctx as any)._onNextClick?.();
+    ctx._onNextClick?.();
   };
 
   return (

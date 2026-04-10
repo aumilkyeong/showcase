@@ -12,7 +12,6 @@ function setup(overrides = {}) {
     useImageCarousel({
       images: threeImages,
       loop: true,
-      transitionDuration: 300,
       width: 600,
       height: 400,
       autoplay: false,

@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "overline": "Component",
+    "title": "Image Carousel",
+    "subtitle": "Browse through images and discover the design strategies and optimizations behind each step."
+  },
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "Navigate, jump, and loop",
+      "description": "The core behavior of an image carousel. Navigate with prev/next buttons, jump to a specific image via dots. Toggle the loop option to see the difference at boundaries.",
+      "hint": "Click buttons and dots, and toggle the loop option",
+      "insight": "The compound component pattern lets you freely rearrange Viewport, buttons, and dots. Context supplies state, so layout order doesn't affect behavior."
+    },
+    "flux": {
+      "title": "One Reducer, many inputs",
+      "description": "Button clicks, dot clicks, keyboard arrows, autoplay timer — actions from different sources all converge into a single Reducer. Watch the action log in real time.",
+      "hint": "Alternate between buttons, dots, and keyboard while watching the log",
+      "insight": "Separating action sources from state mutation logic means adding a new input method never touches business logic."
+    },
+    "autoplay": {
+      "title": "Autoplay meets manual control",
+      "description": "Slides advance automatically at a set interval. The moment the user interacts manually, the timer resets. Hovering pauses it.",
+      "hint": "Enable autoplay, then click a button to see the timer reset",
+      "insight": "Without resetting the timer on manual interaction, automatic transitions overlap with user actions, creating UX jank. Including currentIndex as a dependency solves this naturally."
+    },
+    "performance": {
+      "title": "Preparing behind the scenes",
+      "description": "Loading 100 images at once would blow up the network. We detect user intent in 3 stages and preload only what's needed.",
+      "hint": "Hover to see hover state, slide to see active state",
+      "insight": "Airbnb detects user intent in 3 stages: idle → hover → active. On hover, preload 1 image. On actual slide, preload 3. This eliminates buffering entirely.",
+      "legend": {
+        "notLoaded": "Not loaded",
+        "preloading": "Preloading",
+        "loaded": "Loaded"
+      }
+    },
+    "responsive": {
+      "title": "Resolution for every device",
+      "description": "Pushing 4K originals to mobile is wasteful. The srcSet attribute lets the browser pick the right size for the device.",
+      "hint": "Compare download sizes with and without srcSet",
+      "insight": "object-fit: cover handles mismatched aspect ratios without layout breakage, and srcSet + sizes optimizes bandwidth. All achieved with HTML alone — no JavaScript needed."
+    },
+    "keyboard": {
+      "title": "No mouse required",
+      "description": "Every interaction works with the keyboard alone. Arrow keys to navigate, Home/End to jump to the start or end.",
+      "hint": "Tab to focus, then use arrow keys and Home/End",
+      "insight": "tabIndex={0} makes the entire carousel focusable, and onKeyDown intercepts arrow keys to dispatch Reducer actions.",
+      "keys": {
+        "left": "Previous image",
+        "right": "Next image",
+        "home": "First image",
+        "end": "Last image"
+      }
+    },
+    "a11y": {
+      "title": "Screen readers see the carousel too",
+      "description": "Follows the WAI-ARIA Carousel pattern. Proper roles and ARIA attributes ensure screen reader users get the same experience.",
+      "insight": "When prefers-reduced-motion is detected, animations are disabled and autoplay stops. Accessibility is not a finishing touch — it must be designed in from the start.",
+      "headers": {
+        "element": "Element",
+        "attribute": "Attribute",
+        "role": "Purpose"
+      },
+      "attrs": {
+        "regionRole": "Identifies the carousel area as a landmark",
+        "carouselRoledescription": "Tells screen readers the region's purpose is a carousel",
+        "ariaLive": "Announces slide changes to screen readers (off during autoplay)",
+        "slideRole": "Identifies individual slide roles",
+        "slideRoledescription": "Specifies the group is a slide",
+        "slideLabel": "Conveys position as \"N of M\"",
+        "tablist": "Declares the dot indicator as tab navigation",
+        "tabSelected": "Lets screen readers recognize the active slide"
+      }
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "sections": {
+      "root": "ImageCarousel",
+      "viewport": "ImageCarousel.Viewport",
+      "prev": "ImageCarousel.Prev",
+      "next": "ImageCarousel.Next",
+      "dots": "ImageCarousel.Dots"
+    },
+    "headers": {
+      "prop": "Prop",
+      "type": "Type",
+      "default": "Default",
+      "description": "Description"
+    },
+    "descriptions": {
+      "images": "Array of image data ({ src, alt, srcSet? })",
+      "width": "Carousel width (px)",
+      "height": "Carousel height (px)",
+      "transitionDuration": "Slide transition animation duration (ms)",
+      "loop": "Wrap around from last slide to first",
+      "autoplay": "Enable automatic playback",
+      "delay": "Autoplay interval (ms)",
+      "onLoad": "Callback when first image loads",
+      "onPageSelect": "Callback on slide transition",
+      "onPrevClick": "Callback on prev button click",
+      "onNextClick": "Callback on next button click",
+      "children": "Sub-components (Viewport, Prev, Next, Dots)",
+      "ariaLabelPrev": "Prev button accessibility label",
+      "ariaLabelNext": "Next button accessibility label"
+    }
+  }
+}

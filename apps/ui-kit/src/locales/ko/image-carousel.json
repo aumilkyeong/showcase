@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "overline": "Component",
+    "title": "Image Carousel",
+    "subtitle": "이미지를 넘기며 각 단계에 담긴 설계 전략과 최적화 기법을 발견해보세요."
+  },
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "넘기고, 점프하고, 순환하기",
+      "description": "이미지 캐러셀의 핵심 동작입니다. 이전/다음 버튼으로 탐색하고, 닷을 클릭해 특정 이미지로 점프합니다. 무한 루프 옵션을 토글해 끝에서의 동작 차이를 확인해보세요.",
+      "hint": "버튼과 닷을 클릭하고, loop 토글을 바꿔보세요",
+      "insight": "합성 컴포넌트 패턴 덕분에 Viewport, 버튼, 닷의 배치를 자유롭게 바꿀 수 있습니다. Context가 상태를 공급하므로 배치 순서가 동작에 영향을 주지 않습니다."
+    },
+    "flux": {
+      "title": "하나의 Reducer, 여러 입력",
+      "description": "버튼 클릭, 닷 클릭, 키보드 방향키, 자동 재생 타이머 — 출처가 다른 액션들이 모두 하나의 Reducer로 수렴합니다. 액션 로그를 실시간으로 관찰해보세요.",
+      "hint": "버튼, 닷, 키보드를 번갈아 사용하며 로그를 관찰하세요",
+      "insight": "액션의 출처(Source)와 상태 변경 로직(Implementation)을 분리하면, 새로운 입력 방식을 추가해도 비즈니스 로직을 건드릴 필요가 없습니다."
+    },
+    "autoplay": {
+      "title": "자동 재생과 수동 개입",
+      "description": "일정 간격으로 자동 전환되다가, 사용자가 직접 조작하는 순간 타이머가 리셋됩니다. 마우스를 올리면 일시 정지됩니다.",
+      "hint": "autoplay를 켜고, 버튼을 눌러 타이머 리셋을 확인하세요",
+      "insight": "수동 개입 시 타이머를 리셋하지 않으면, 사용자가 버튼을 누른 직후 자동 전환이 겹쳐 UX가 꼬입니다. currentIndex를 의존성에 넣는 것만으로 자연스럽게 해결됩니다."
+    },
+    "performance": {
+      "title": "보이지 않는 곳에서 미리 준비하기",
+      "description": "100장의 이미지를 한 번에 로드하면 네트워크가 폭파됩니다. 사용자의 의도를 3단계로 감지해 필요한 이미지만 선행 로드합니다.",
+      "hint": "마우스를 올려 hover 상태, 슬라이드를 넘겨 active 상태를 확인하세요",
+      "insight": "Airbnb는 유저 의도를 idle → hover → active 3단계로 감지합니다. 마우스가 올라오면 1장, 실제 넘기면 3장을 선행 로드해 버퍼링을 완전히 제거합니다.",
+      "legend": {
+        "notLoaded": "미로딩",
+        "preloading": "선행 로딩",
+        "loaded": "로드 완료"
+      }
+    },
+    "responsive": {
+      "title": "기기에 맞는 해상도",
+      "description": "모바일에 4K 원본을 밀어 넣는 건 낭비입니다. srcSet 속성으로 브라우저가 디바이스에 맞는 크기를 선택하게 합니다.",
+      "hint": "srcSet 적용 전후의 다운로드 사이즈 차이를 확인해보세요",
+      "insight": "object-fit: cover로 비율 불일치 이미지를 레이아웃 붕괴 없이 처리하고, srcSet + sizes로 대역폭을 최적화합니다. JavaScript 없이 HTML만으로 완성됩니다."
+    },
+    "keyboard": {
+      "title": "마우스 없이도",
+      "description": "모든 인터랙션이 키보드만으로 가능합니다. 방향키로 탐색하고, Home/End로 처음과 끝으로 점프합니다.",
+      "hint": "Tab으로 포커스 후, 방향키와 Home/End를 사용해보세요",
+      "insight": "tabIndex={0}으로 캐러셀 전체를 포커스 가능하게 만들고, onKeyDown에서 방향키를 가로채 Reducer 액션으로 변환합니다.",
+      "keys": {
+        "left": "이전 이미지",
+        "right": "다음 이미지",
+        "home": "첫 번째 이미지",
+        "end": "마지막 이미지"
+      }
+    },
+    "a11y": {
+      "title": "스크린 리더도 캐러셀을 본다",
+      "description": "WAI-ARIA Carousel 패턴을 준수합니다. 각 요소에 적절한 role과 aria 속성을 부여해 스크린 리더 사용자도 동일한 경험을 합니다.",
+      "insight": "prefers-reduced-motion을 감지하면 애니메이션을 비활성화하고 autoplay를 중지합니다. 접근성은 완성 후 덧붙이는 것이 아니라 설계 초기부터 반영해야 합니다.",
+      "headers": {
+        "element": "요소",
+        "attribute": "속성",
+        "role": "역할"
+      },
+      "attrs": {
+        "regionRole": "캐러셀 영역을 랜드마크로 식별합니다",
+        "carouselRoledescription": "region의 목적이 캐러셀임을 스크린 리더에 전달합니다",
+        "ariaLive": "슬라이드 변경을 스크린 리더에 알립니다 (autoplay 시 off)",
+        "slideRole": "개별 슬라이드의 역할을 식별합니다",
+        "slideRoledescription": "그룹이 슬라이드임을 명시합니다",
+        "slideLabel": "현재 위치를 \"N of M\" 형식으로 전달합니다",
+        "tablist": "닷 인디케이터가 탭 네비게이션임을 선언합니다",
+        "tabSelected": "현재 활성 슬라이드를 스크린 리더가 인지합니다"
+      }
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "sections": {
+      "root": "ImageCarousel",
+      "viewport": "ImageCarousel.Viewport",
+      "prev": "ImageCarousel.Prev",
+      "next": "ImageCarousel.Next",
+      "dots": "ImageCarousel.Dots"
+    },
+    "headers": {
+      "prop": "Prop",
+      "type": "타입",
+      "default": "기본값",
+      "description": "설명"
+    },
+    "descriptions": {
+      "images": "이미지 데이터 배열 ({ src, alt, srcSet? })",
+      "width": "캐러셀 너비 (px)",
+      "height": "캐러셀 높이 (px)",
+      "transitionDuration": "슬라이드 전환 애니메이션 시간 (ms)",
+      "loop": "마지막 슬라이드에서 처음으로 순환",
+      "autoplay": "자동 재생 활성화",
+      "delay": "자동 재생 간격 (ms)",
+      "onLoad": "첫 이미지 로드 완료 시 콜백",
+      "onPageSelect": "슬라이드 전환 시 콜백",
+      "onPrevClick": "이전 버튼 클릭 시 콜백",
+      "onNextClick": "다음 버튼 클릭 시 콜백",
+      "children": "서브 컴포넌트 (Viewport, Prev, Next, Dots)",
+      "ariaLabelPrev": "이전 버튼 접근성 라벨",
+      "ariaLabelNext": "다음 버튼 접근성 라벨"
+    }
+  }
+}

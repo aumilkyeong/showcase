@@ -13,7 +13,7 @@ import {
   useDropdownMenuContext,
 } from './DropdownMenuContext';
 import { useDropdownMenu } from './useDropdownMenu';
-import { useClickOutside } from '@/hooks/useClickOutside';
+// useClickOutside is not used here; we use a custom handler to support portal strategy
 import styles from './DropdownMenu.module.css';
 
 /* ─── Root ──────────────────────────────────────────────────────────── */
@@ -38,7 +38,22 @@ function DropdownMenuRoot({
     [state],
   );
 
-  useClickOutside(containerRef, state.close);
+  // Custom click-outside handler that checks both containerRef and listRef
+  // to support portal strategy where the menu is rendered outside the container
+  useEffect(() => {
+    function handleMouseDown(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(target) &&
+        (!state.listRef.current || !state.listRef.current.contains(target))
+      ) {
+        state.close();
+      }
+    }
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => document.removeEventListener('mousedown', handleMouseDown);
+  }, [state.close, state.listRef]);
 
   const contextValue = {
     ...state,
@@ -67,6 +82,9 @@ function Button({ children, onClick, onKeyDown, ...rest }: ButtonProps) {
   const ctx = useDropdownMenuContext();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ctx.isOpen) {
+      ctx.setInitialFocusPosition('first');
+    }
     ctx.toggle();
     onClick?.(e);
   };
@@ -74,13 +92,16 @@ function Button({ children, onClick, onKeyDown, ...rest }: ButtonProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (!ctx.isOpen) ctx.toggle();
-      // List's useEffect will auto-focus first enabled item on open
+      if (!ctx.isOpen) {
+        ctx.setInitialFocusPosition('first');
+        ctx.toggle();
+      }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (!ctx.isOpen) ctx.toggle();
-      // List's useEffect will auto-focus first enabled item on open
-      // For ArrowUp we want last item, but this is handled by auto-focus for now
+      if (!ctx.isOpen) {
+        ctx.setInitialFocusPosition('last');
+        ctx.toggle();
+      }
     }
     onKeyDown?.(e);
   };
@@ -138,19 +159,27 @@ function List({ children }: ListProps) {
     };
   }, [ctx.isOpen, ctx.strategy, ctx.buttonRef]);
 
-  // Focus first enabled item on open
+  // Focus first or last enabled item on open based on initialFocusPosition
   useEffect(() => {
     if (!ctx.isOpen) return;
+    if (ctx.initialFocusPosition === null) return;
     const list = ctx.listRef.current;
     if (!list) return;
-    const items = list.querySelectorAll<HTMLElement>('[role="menuitem"]');
-    for (const item of items) {
-      if (item.getAttribute('aria-disabled') !== 'true') {
-        item.focus();
-        break;
-      }
+    const items = Array.from(
+      list.querySelectorAll<HTMLElement>('[role="menuitem"]'),
+    );
+    const enabledItems = items.filter(
+      (item) => item.getAttribute('aria-disabled') !== 'true',
+    );
+    if (enabledItems.length === 0) return;
+
+    if (ctx.initialFocusPosition === 'last') {
+      enabledItems[enabledItems.length - 1].focus();
+    } else {
+      enabledItems[0].focus();
     }
-  }, [ctx.isOpen, ctx.listRef]);
+    ctx.setInitialFocusPosition(null);
+  }, [ctx.isOpen, ctx.listRef, ctx.initialFocusPosition, ctx.setInitialFocusPosition]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLUListElement>) => {
     const list = ctx.listRef.current;

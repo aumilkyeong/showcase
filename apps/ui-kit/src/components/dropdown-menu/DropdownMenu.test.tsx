@@ -57,11 +57,12 @@ describe('DropdownMenu', () => {
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
 
-  it('clicking disabled item does not call onClick', async () => {
+  it('clicking disabled item does not call onClick and keeps menu open', async () => {
     const { user, handleDelete } = setup();
     await user.click(screen.getByRole('button', { name: 'Actions' }));
     await user.click(screen.getByRole('menuitem', { name: 'Delete' }));
     expect(handleDelete).not.toHaveBeenCalled();
+    expect(screen.getByRole('menu')).toBeInTheDocument();
   });
 
   it('disabled item has aria-disabled', async () => {
@@ -215,5 +216,25 @@ describe('DropdownMenu', () => {
     await user.keyboard(' ');
     expect(handleSave).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
+  it('keyboard: ArrowUp on button opens menu and focuses last enabled item', async () => {
+    const { user } = setup();
+    screen.getByRole('button', { name: 'Actions' }).focus();
+    await user.keyboard('{ArrowUp}');
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+    // Last enabled item is Save (index 1, Delete at index 2 is disabled)
+    expect(screen.getByRole('menuitem', { name: 'Save' })).toHaveFocus();
+  });
+
+  it('portal strategy: clicking inside menu does not close it', async () => {
+    const { user } = setup({ strategy: 'portal' });
+    await user.click(screen.getByRole('button', { name: 'Actions' }));
+    const menu = screen.getByRole('menu');
+    expect(menu).toBeInTheDocument();
+
+    // Click inside the menu (on a non-item area or the menu itself)
+    await user.click(menu);
+    expect(screen.getByRole('menu')).toBeInTheDocument();
   });
 });

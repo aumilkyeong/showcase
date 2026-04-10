@@ -13,6 +13,9 @@ export function useDropdownMenu({ strategy }: UseDropdownMenuOptions) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [initialFocusPosition, setInitialFocusPosition] = useState<
+    'first' | 'last' | null
+  >(null);
   const [itemRegistry, setItemRegistry] = useState<
     Map<number, { disabled: boolean }>
   >(new Map());
@@ -75,6 +78,8 @@ export function useDropdownMenu({ strategy }: UseDropdownMenuOptions) {
     buttonRef,
     listRef,
     enabledIndices,
+    initialFocusPosition,
+    setInitialFocusPosition,
     toggle,
     close,
     select,

@@ -88,3 +88,26 @@ test('buttonId and listId are defined', () => {
   expect(result.current.buttonId).toBeTruthy();
   expect(result.current.listId).toBeTruthy();
 });
+
+test('initialFocusPosition defaults to null', () => {
+  const { result } = setup();
+  expect(result.current.initialFocusPosition).toBeNull();
+});
+
+test('setInitialFocusPosition updates value', () => {
+  const { result } = setup();
+  act(() => {
+    result.current.setInitialFocusPosition('last');
+  });
+  expect(result.current.initialFocusPosition).toBe('last');
+
+  act(() => {
+    result.current.setInitialFocusPosition('first');
+  });
+  expect(result.current.initialFocusPosition).toBe('first');
+
+  act(() => {
+    result.current.setInitialFocusPosition(null);
+  });
+  expect(result.current.initialFocusPosition).toBeNull();
+});

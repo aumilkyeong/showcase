@@ -35,7 +35,7 @@ function DropdownMenuRoot({
       state.select(index);
       state.buttonRef.current?.focus();
     },
-    [state],
+    [state.select, state.buttonRef],
   );
 
   // Custom click-outside handler that checks both containerRef and listRef

@@ -161,6 +161,7 @@ function CompositionDemo() {
 
 function PortalDemo() {
   const { t } = useTranslation('modal-dialog');
+  const [noPortalOpen, setNoPortalOpen] = useState(false);
   const [portalOpen, setPortalOpen] = useState(false);
 
   return (
@@ -171,9 +172,50 @@ function PortalDemo() {
         </p>
         <div className={styles.overflowContainer}>
           <span className={styles.overflowTag}>overflow: hidden</span>
-          <p style={{ color: '#8b949e', fontSize: 13, margin: '0 0 8px' }}>
-            {t('steps.portal.clippedNote')}
-          </p>
+          {!noPortalOpen ? (
+            <button
+              className={styles.demoButton}
+              onClick={() => setNoPortalOpen(true)}
+            >
+              {t('steps.portal.withoutPortal')}
+            </button>
+          ) : (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(0,0,0,0.7)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1,
+              }}
+            >
+              <div
+                style={{
+                  background: '#101010',
+                  border: '1px solid #3d3a39',
+                  borderRadius: 8,
+                  padding: 20,
+                  width: 280,
+                }}
+              >
+                <h3 style={{ margin: '0 0 8px', fontSize: 14, color: '#f2f2f2' }}>
+                  {t('steps.portal.modalTitle')}
+                </h3>
+                <p style={{ fontSize: 13, color: '#8b949e', margin: '0 0 12px' }}>
+                  {t('steps.portal.clippedNote')}
+                </p>
+                <button
+                  className={styles.demoButton}
+                  onClick={() => setNoPortalOpen(false)}
+                  style={{ fontSize: 12 }}
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.comparisonBox}>

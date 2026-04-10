@@ -22,4 +22,9 @@ export const componentRoutes: RouteEntry[] = [
     label: 'Image Carousel',
     component: lazy(() => import('./pages/image-carousel/ImageCarouselPage')),
   },
+  {
+    path: 'modal-dialog',
+    label: 'Modal Dialog',
+    component: lazy(() => import('./pages/modal-dialog/ModalDialogPage')),
+  },
 ];

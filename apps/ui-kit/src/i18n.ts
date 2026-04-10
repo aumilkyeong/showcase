@@ -9,6 +9,8 @@ import enCommon from '@/locales/en/common.json';
 import enAutocomplete from '@/locales/en/autocomplete.json';
 import enDropdownMenu from '@/locales/en/dropdown-menu.json';
 import enImageCarousel from '@/locales/en/image-carousel.json';
+import koModalDialog from '@/locales/ko/modal-dialog.json';
+import enModalDialog from '@/locales/en/modal-dialog.json';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -17,17 +19,19 @@ i18n.use(initReactI18next).init({
       autocomplete: koAutocomplete,
       'dropdown-menu': koDropdownMenu,
       'image-carousel': koImageCarousel,
+      'modal-dialog': koModalDialog,
     },
     en: {
       common: enCommon,
       autocomplete: enAutocomplete,
       'dropdown-menu': enDropdownMenu,
       'image-carousel': enImageCarousel,
+      'modal-dialog': enModalDialog,
     },
   },
   lng: 'ko',
   fallbackLng: 'ko',
-  ns: ['common', 'autocomplete', 'dropdown-menu', 'image-carousel'],
+  ns: ['common', 'autocomplete', 'dropdown-menu', 'image-carousel', 'modal-dialog'],
   defaultNS: 'common',
   interpolation: {
     escapeValue: false,

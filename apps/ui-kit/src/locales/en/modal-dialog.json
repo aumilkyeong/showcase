@@ -1,0 +1,166 @@
+{
+  "hero": {
+    "overline": "Component",
+    "title": "Modal Dialog",
+    "subtitle": "Open and close modals, and discover the design intent behind each step."
+  },
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "Controlled vs Uncontrolled",
+      "description": "Two ways to open a modal. Controlled mode lets the parent manage the isOpen state directly, while uncontrolled mode toggles its own state on Trigger click.",
+      "hint": "Click both buttons to open each modal",
+      "insight": "Use controlled mode when external events (API responses, timers) need to open the modal. Use uncontrolled mode for simple button toggles.",
+      "controlledLabel": "Controlled Mode",
+      "uncontrolledLabel": "Uncontrolled Mode",
+      "openControlled": "Open Modal (Controlled)",
+      "openUncontrolled": "Open Modal",
+      "close": "Close",
+      "confirm": "Confirm",
+      "controlledTitle": "Controlled Modal",
+      "controlledBody": "The parent component manages isOpen and onClose directly.",
+      "uncontrolledTitle": "Uncontrolled Modal",
+      "uncontrolledBody": "Click the Trigger to open, and the modal manages its own state."
+    },
+    "composition": {
+      "title": "Why compound components?",
+      "description": "Compare a single component with all props vs. a compound component split by role.",
+      "hint": "Try the compound component demo",
+      "insight": "The compound pattern allows free customization per slot while sharing internal state via Context.",
+      "singleLabel": "Single Component (Props)",
+      "compoundLabel": "Compound Component (Composition)",
+      "openModal": "Open Modal",
+      "close": "Close",
+      "confirm": "Confirm",
+      "modalTitle": "Compound Component Modal",
+      "body": "Freely compose Header, Body, and Footer as you like."
+    },
+    "portal": {
+      "title": "Portal rendering",
+      "description": "What happens when you open a modal inside an overflow: hidden container? Without Portal, the modal gets clipped.",
+      "hint": "Click both buttons to compare the difference with and without Portal",
+      "insight": "Floating UI elements (modals, tooltips, dropdowns) must escape the DOM hierarchy. React Portal solves this.",
+      "withoutPortal": "Without Portal",
+      "withPortal": "With Portal",
+      "modalTitle": "Portal Test",
+      "body": "Can you see this modal without clipping?"
+    },
+    "focusTrap": {
+      "title": "Focus trap",
+      "description": "When the modal opens, focus is trapped inside. Tab and Shift+Tab cycle through elements without escaping.",
+      "hint": "Open the modal and try Tab to cycle focus",
+      "insight": "Focus trap in 4 steps — save previous focus → move to first element → Tab loop → restore on close. Essential for screen reader accessibility.",
+      "open": "Open Focus Trap Modal",
+      "modalTitle": "Focus Trap",
+      "name": "Name",
+      "email": "Email",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "focusIndicator": "Current focus"
+    },
+    "animation": {
+      "title": "Animation separation",
+      "description": "Overlay (fade-in) and content (slide-up) have independent animations. In a parent-child structure, opacity propagates and breaks things.",
+      "hint": "Toggle between the two structures to compare animations",
+      "insight": "When overlay and content are parent-child, the parent's opacity propagates to the child, breaking the animation. Sibling separation is key.",
+      "siblingLabel": "Sibling Structure (Correct)",
+      "nestedLabel": "Parent-Child Structure (Broken)",
+      "open": "Open Modal",
+      "modalTitle": "Animation Test",
+      "body": "Check if overlay fade and content slide work independently."
+    },
+    "nativeDialog": {
+      "title": "Native <dialog> comparison",
+      "description": "Compare HTML5 <dialog> tag with our custom modal side by side. Try Tab to see focus escape in the native dialog.",
+      "hint": "Try Tab in each modal to experience the focus trap difference",
+      "insight": "Native <dialog> opens with a single showModal() call, but its focus trap is incomplete — JS supplementation is still required in production.",
+      "customLabel": "Custom Modal",
+      "nativeLabel": "Native <dialog>",
+      "openCustom": "Open Custom Modal",
+      "openNative": "Open Native Dialog",
+      "modalTitle": "Focus Comparison",
+      "input1": "Input 1",
+      "input2": "Input 2",
+      "close": "Close"
+    },
+    "stacked": {
+      "title": "Stacked modals",
+      "description": "Modals can be stacked on top of each other. Pressing ESC closes only the topmost one (LIFO).",
+      "hint": "Open another modal from within a modal",
+      "insight": "A module-level modal stack ensures ESC events only reach the topmost modal.",
+      "open": "Open First Modal",
+      "title1": "Modal Level 1",
+      "body1": "You can open another modal on top of this one.",
+      "openNext": "Open Next Modal",
+      "title2": "Modal Level 2",
+      "body2": "Pressing ESC closes only this modal.",
+      "title3": "Modal Level 3",
+      "body3": "This is the topmost modal. Try closing them one by one with ESC.",
+      "close": "Close",
+      "stackDepth": "Current depth: {{depth}}"
+    },
+    "keyboard": {
+      "title": "Keyboard navigation",
+      "description": "Every interaction works with the keyboard alone.",
+      "hint": "Open the modal and operate it with keyboard only",
+      "insight": "Tab/Shift+Tab cycles focus, ESC closes immediately. Users without a mouse get an equal experience.",
+      "open": "Open Modal",
+      "modalTitle": "Keyboard Test",
+      "body": "Try Tab, Shift+Tab, and ESC to interact with the modal.",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "keys": {
+        "tab": "Move to next focusable element",
+        "shiftTab": "Move to previous focusable element",
+        "escape": "Close modal"
+      }
+    },
+    "a11y": {
+      "title": "Accessibility (ARIA)",
+      "description": "Follows the WAI-ARIA Dialog pattern. Screen reader users get the same experience.",
+      "insight": "role=\"dialog\" and aria-modal=\"true\" must be part of the design from the start. aria-labelledby and aria-describedby let screen readers announce the modal's title and content.",
+      "headers": {
+        "attribute": "Attribute",
+        "element": "Element",
+        "role": "Purpose"
+      },
+      "attrs": {
+        "dialog": "Declares the dialog role",
+        "modal": "Communicates modal mode to screen readers",
+        "labelledby": "Links to the Header title so screen readers announce it",
+        "describedby": "Links to the Body content for additional description"
+      }
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "sections": {
+      "root": "ModalDialog",
+      "trigger": "ModalDialog.Trigger",
+      "header": "ModalDialog.Header",
+      "body": "ModalDialog.Body",
+      "footer": "ModalDialog.Footer"
+    },
+    "headers": {
+      "prop": "Prop",
+      "type": "Type",
+      "default": "Default",
+      "description": "Description"
+    },
+    "descriptions": {
+      "children": "Child components",
+      "isOpen": "Controlled mode: open/close state",
+      "defaultOpen": "Uncontrolled mode: initial open state",
+      "onClose": "Close callback (required for controlled mode)",
+      "closeOnOverlayClick": "Close on overlay click",
+      "closeOnEsc": "Close on ESC key",
+      "width": "Modal width",
+      "maxHeight": "Modal max height",
+      "triggerChildren": "Trigger element (opens modal on click)",
+      "headerChildren": "Title content",
+      "showCloseButton": "Show X close button",
+      "bodyChildren": "Body content",
+      "footerChildren": "Action button area"
+    }
+  }
+}

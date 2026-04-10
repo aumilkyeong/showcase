@@ -173,11 +173,11 @@ function List({ children }: ListProps) {
     );
     if (enabledItems.length === 0) return;
 
-    if (ctx.initialFocusPosition === 'last') {
-      enabledItems[enabledItems.length - 1].focus();
-    } else {
-      enabledItems[0].focus();
-    }
+    const target =
+      ctx.initialFocusPosition === 'last'
+        ? enabledItems[enabledItems.length - 1]
+        : enabledItems[0];
+    target?.focus();
     ctx.setInitialFocusPosition(null);
   }, [ctx.isOpen, ctx.listRef, ctx.initialFocusPosition, ctx.setInitialFocusPosition]);
 
@@ -204,7 +204,7 @@ function List({ children }: ListProps) {
           currentEnabledIndex < 0
             ? 0
             : (currentEnabledIndex + 1) % enabledItems.length;
-        enabledItems[nextIndex].focus();
+        enabledItems[nextIndex]?.focus();
         break;
       }
       case 'ArrowUp': {
@@ -213,17 +213,17 @@ function List({ children }: ListProps) {
           currentEnabledIndex <= 0
             ? enabledItems.length - 1
             : currentEnabledIndex - 1;
-        enabledItems[prevIndex].focus();
+        enabledItems[prevIndex]?.focus();
         break;
       }
       case 'Home': {
         e.preventDefault();
-        enabledItems[0].focus();
+        enabledItems[0]?.focus();
         break;
       }
       case 'End': {
         e.preventDefault();
-        enabledItems[enabledItems.length - 1].focus();
+        enabledItems[enabledItems.length - 1]?.focus();
         break;
       }
       case 'Enter':

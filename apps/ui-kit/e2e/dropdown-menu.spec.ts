@@ -11,12 +11,12 @@ test.describe('Dropdown Menu (ko)', () => {
       page.getByRole('heading', { name: 'Dropdown Menu' }),
     ).toBeVisible();
     await expect(
-      page.getByRole('button', { name: 'Actions' }).first(),
+      page.getByRole('button', { name: 'File' }),
     ).toBeVisible();
   });
 
   test('basic demo: click to open, select item', async ({ page }) => {
-    const button = page.getByRole('button', { name: 'Actions' }).first();
+    const button = page.getByRole('button', { name: 'File' });
     await button.click();
     const menu = page.getByRole('menu').first();
     await expect(menu).toBeVisible();
@@ -26,7 +26,7 @@ test.describe('Dropdown Menu (ko)', () => {
   });
 
   test('keyboard-only flow: open, navigate, select', async ({ page }) => {
-    const button = page.getByRole('button', { name: 'Actions' }).first();
+    const button = page.getByRole('button', { name: 'File' });
     await button.focus();
     await button.press('Enter');
     await expect(page.getByRole('menu').first()).toBeVisible();
@@ -37,7 +37,7 @@ test.describe('Dropdown Menu (ko)', () => {
   });
 
   test('Escape closes the menu', async ({ page }) => {
-    const button = page.getByRole('button', { name: 'Actions' }).first();
+    const button = page.getByRole('button', { name: 'File' });
     await button.click();
     await expect(page.getByRole('menu').first()).toBeVisible();
     await page.keyboard.press('Escape');
@@ -45,7 +45,7 @@ test.describe('Dropdown Menu (ko)', () => {
   });
 
   test('axe accessibility scan passes', async ({ page }) => {
-    const button = page.getByRole('button', { name: 'Actions' }).first();
+    const button = page.getByRole('button', { name: 'File' });
     await button.click();
     await expect(page.getByRole('menu').first()).toBeVisible();
     const results = await new AxeBuilder({ page }).analyze();
@@ -63,19 +63,19 @@ test.describe('Dropdown Menu (en)', () => {
       page.getByRole('heading', { name: 'Dropdown Menu' }),
     ).toBeVisible();
     await expect(
-      page.getByRole('button', { name: 'Actions' }).first(),
+      page.getByRole('button', { name: 'File' }),
     ).toBeVisible();
   });
 
   test('basic demo: select item shows English text', async ({ page }) => {
-    const button = page.getByRole('button', { name: 'Actions' }).first();
+    const button = page.getByRole('button', { name: 'File' });
     await button.click();
     await page.getByRole('menuitem', { name: 'New File' }).click();
     await expect(page.getByText('Selected: New File')).toBeVisible();
   });
 
   test('axe accessibility scan passes', async ({ page }) => {
-    const button = page.getByRole('button', { name: 'Actions' }).first();
+    const button = page.getByRole('button', { name: 'File' });
     await button.click();
     await expect(page.getByRole('menu').first()).toBeVisible();
     const results = await new AxeBuilder({ page }).analyze();

@@ -41,12 +41,9 @@ export function useDropdownMenu({ strategy }: UseDropdownMenuOptions) {
     setActiveIndex(-1);
   }, []);
 
-  const select = useCallback(
-    (_index: number) => {
-      close();
-    },
-    [close],
-  );
+  const select = useCallback(() => {
+    close();
+  }, [close]);
 
   const getItemId = useCallback((index: number) => `${id}-item-${index}`, [id]);
 

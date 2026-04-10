@@ -15,7 +15,7 @@ export interface DropdownMenuContextValue {
   unregisterItem: (index: number) => void;
   buttonRef: React.RefObject<HTMLButtonElement | null>;
   listRef: React.RefObject<HTMLUListElement | null>;
-  select: (index: number) => void;
+  select: () => void;
   onItemClick?: (index: number) => void;
   initialFocusPosition: 'first' | 'last' | null;
   setInitialFocusPosition: (position: 'first' | 'last' | null) => void;

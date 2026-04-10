@@ -4,6 +4,7 @@ import {
   type LiHTMLAttributes,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -31,8 +32,8 @@ function DropdownMenuRoot({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleItemClick = useCallback(
-    (index: number) => {
-      state.select(index);
+    (_index: number) => {
+      state.select();
       state.buttonRef.current?.focus();
     },
     [state.select, state.buttonRef],
@@ -41,6 +42,8 @@ function DropdownMenuRoot({
   // Custom click-outside handler that checks both containerRef and listRef
   // to support portal strategy where the menu is rendered outside the container
   useEffect(() => {
+    if (!state.isOpen) return;
+
     function handleMouseDown(event: MouseEvent) {
       const target = event.target as Node;
       if (
@@ -53,12 +56,34 @@ function DropdownMenuRoot({
     }
     document.addEventListener('mousedown', handleMouseDown);
     return () => document.removeEventListener('mousedown', handleMouseDown);
-  }, [state.close, state.listRef]);
+  }, [state.isOpen, state.close, state.listRef]);
 
-  const contextValue = {
-    ...state,
-    onItemClick: handleItemClick,
-  };
+  const contextValue = useMemo(
+    () => ({
+      ...state,
+      onItemClick: handleItemClick,
+    }),
+    [
+      state.isOpen,
+      state.activeIndex,
+      state.buttonId,
+      state.listId,
+      state.strategy,
+      state.buttonRef,
+      state.listRef,
+      state.enabledIndices,
+      state.initialFocusPosition,
+      state.setInitialFocusPosition,
+      state.toggle,
+      state.close,
+      state.select,
+      state.setActiveIndex,
+      state.getItemId,
+      state.registerItem,
+      state.unregisterItem,
+      handleItemClick,
+    ],
+  );
 
   return (
     <DropdownMenuContext.Provider value={contextValue}>
@@ -262,6 +287,9 @@ function List({ children }: ListProps) {
       id={ctx.listId}
       role="menu"
       aria-labelledby={ctx.buttonId}
+      aria-activedescendant={
+        ctx.activeIndex >= 0 ? ctx.getItemId(ctx.activeIndex) : undefined
+      }
       className={ctx.strategy === 'portal' ? styles.menuPortal : styles.menu}
       style={
         ctx.strategy === 'portal'

@@ -68,7 +68,7 @@ test('select closes menu and resets activeIndex', () => {
     result.current.toggle();
   });
   act(() => {
-    result.current.select(1);
+    result.current.select();
   });
   expect(result.current.isOpen).toBe(false);
   expect(result.current.activeIndex).toBe(-1);

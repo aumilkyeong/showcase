@@ -52,6 +52,7 @@ export function useModalDialog({
 
     previousFocusRef.current = document.activeElement as HTMLElement;
     modalStack.push(id);
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const timer = setTimeout(() => {
@@ -71,7 +72,7 @@ export function useModalDialog({
         modalStack.splice(idx, 1);
       }
       if (modalStack.length === 0) {
-        document.body.style.overflow = '';
+        document.body.style.overflow = originalOverflow;
       }
       previousFocusRef.current?.focus();
     };
@@ -85,6 +86,7 @@ export function useModalDialog({
       if (e.key === 'Escape') {
         const topModal = modalStack[modalStack.length - 1];
         if (topModal === id) {
+          e.stopPropagation();
           handleClose();
         }
       }
@@ -109,7 +111,10 @@ export function useModalDialog({
       const focusable = Array.from(
         container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
       );
-      if (focusable.length === 0) return;
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];

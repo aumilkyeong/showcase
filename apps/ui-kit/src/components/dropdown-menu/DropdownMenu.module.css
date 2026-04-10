@@ -1,0 +1,104 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #101010;
+  border: 1px solid #3d3a39;
+  border-radius: 6px;
+  color: #f2f2f2;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.button:focus-visible {
+  outline: none;
+  border-color: #00d992;
+  box-shadow: 0 0 0 2px rgba(0, 217, 146, 0.25);
+}
+
+.button::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid currentColor;
+  transition: transform 0.15s;
+}
+
+.buttonOpen::after {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 180px;
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  background: #101010;
+  border: 1px solid #3d3a39;
+  border-radius: 8px;
+  box-shadow:
+    rgba(0, 0, 0, 0.7) 0px 20px 60px,
+    rgba(148, 163, 184, 0.1) 0px 0px 0px 1px inset;
+  z-index: 100;
+}
+
+.menuPortal {
+  position: fixed;
+  z-index: 9999;
+  min-width: 180px;
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  background: #101010;
+  border: 1px solid #3d3a39;
+  border-radius: 8px;
+  box-shadow:
+    rgba(0, 0, 0, 0.7) 0px 20px 60px,
+    rgba(148, 163, 184, 0.1) 0px 0px 0px 1px inset;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: #b8b3b0;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background 0.1s,
+    color 0.1s;
+}
+
+.item:hover,
+.item:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.item:active {
+  background: rgba(0, 217, 146, 0.1);
+}
+
+.itemDisabled {
+  color: #8b949e;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.itemDisabled:hover,
+.itemDisabled:focus {
+  background: transparent;
+}

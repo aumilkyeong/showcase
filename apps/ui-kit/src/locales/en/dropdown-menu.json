@@ -1,0 +1,92 @@
+{
+  "hero": {
+    "overline": "Component",
+    "title": "Dropdown Menu",
+    "subtitle": "Click the button, explore the menu, and discover the design intent behind each step."
+  },
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "Open, close, and select",
+      "description": "The most essential behavior of a dropdown menu. Click the button to open, select an item to close. Clicking outside also closes it.",
+      "hint": "Click the button and select an item",
+      "insight": "The compound component pattern makes each sub-component's role explicit. Context silently provides state — no prop drilling needed.",
+      "selected": "Selected: {{item}}"
+    },
+    "pattern": {
+      "title": "Why compound components?",
+      "description": "Compare two ways to build the same dropdown. A single component with all props vs. a compound component split by role. The code tells you why we chose composition.",
+      "hint": "Try the compound component demo",
+      "insight": "A single component is simple but rigid to customize. Compound components let you independently swap or extend each part — design-system-level flexibility.",
+      "singleLabel": "Single Component (Props)",
+      "compoundLabel": "Compound Component (Composition)",
+      "selected": "Selected: {{item}}"
+    },
+    "strategy": {
+      "title": "Where should the menu float?",
+      "description": "The same dropdown behaves differently depending on where it renders in the DOM. See the difference inside an overflow: hidden container.",
+      "hint": "Open both dropdowns and compare the clipping",
+      "insight": "Relative is simple but vulnerable to layout constraints. Portal is free from constraints but requires scroll/resize recalculation. Know your context to pick the right strategy.",
+      "relativeLabel": "Relative (position: absolute)",
+      "portalLabel": "Portal (createPortal)"
+    },
+    "keyboard": {
+      "title": "No mouse required",
+      "description": "Every interaction works with the keyboard alone. Disabled items are automatically skipped.",
+      "hint": "Tab to the button, Enter to open, arrow keys to navigate",
+      "insight": "Skipping disabled items isn't simple index math — it traverses a filtered array of enabled items in a cycle. This small difference defines the keyboard user's experience.",
+      "selected": "Selected: {{item}}",
+      "keys": {
+        "enter": "Open menu / Select",
+        "space": "Open menu / Select",
+        "down": "Next item",
+        "up": "Previous item",
+        "home": "First item",
+        "end": "Last item",
+        "escape": "Close menu"
+      }
+    },
+    "a11y": {
+      "title": "Beyond what you see",
+      "description": "Follows the WAI-ARIA Menu Button pattern. Screen reader users get the same experience.",
+      "insight": "Accessibility is not a finishing touch. role, aria-haspopup, and aria-expanded must be part of the design from the start so screen reader users experience the same flow.",
+      "headers": {
+        "attribute": "Attribute",
+        "role": "Purpose"
+      },
+      "attrs": {
+        "haspopup": "Declares that this button controls a popup menu",
+        "expanded": "Communicates whether the menu is open to screen readers",
+        "controls": "Links the button to the menu's DOM ID",
+        "menu": "Identifies that child elements are menu items",
+        "menuitem": "Identifies individual action items",
+        "disabled": "Lets screen readers recognize disabled items"
+      }
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "sections": {
+      "root": "DropdownMenu",
+      "button": "DropdownMenu.Button",
+      "list": "DropdownMenu.List",
+      "item": "DropdownMenu.Item"
+    },
+    "headers": {
+      "prop": "Prop",
+      "type": "Type",
+      "default": "Default",
+      "description": "Description"
+    },
+    "descriptions": {
+      "children": "Child components",
+      "strategy": "Rendering placement strategy",
+      "buttonChildren": "Button label",
+      "buttonRest": "Native button attribute pass-through",
+      "listChildren": "Item components",
+      "itemChildren": "Item text",
+      "onClick": "Callback when item is selected",
+      "disabled": "Disables the item"
+    }
+  }
+}

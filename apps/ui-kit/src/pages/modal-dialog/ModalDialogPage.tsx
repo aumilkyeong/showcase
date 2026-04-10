@@ -163,7 +163,7 @@ function PortalDemo() {
         <div className={styles.overflowContainer}>
           <span className={styles.overflowTag}>overflow: hidden</span>
           <p style={{ color: '#8b949e', fontSize: 13, margin: '0 0 8px' }}>
-            Portal 없이는 모달이 이 영역에 갇힙니다.
+            {t('steps.portal.clippedNote')}
           </p>
         </div>
       </div>

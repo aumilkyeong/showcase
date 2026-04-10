@@ -40,6 +40,7 @@
       "description": "overflow: hidden 컨테이너 안에서 모달을 열면 어떻게 될까요? Portal 없이는 모달이 잘립니다.",
       "hint": "두 버튼을 눌러 Portal 유무 차이를 비교해보세요",
       "insight": "모달, 툴팁, 드롭다운 등 떠 있는 UI는 반드시 DOM 계층을 탈출해야 합니다. React Portal이 이를 해결합니다.",
+      "clippedNote": "Portal 없이는 모달이 이 영역에 갇힙니다.",
       "withoutPortal": "Portal 없이",
       "withPortal": "Portal 사용",
       "modalTitle": "Portal 테스트",

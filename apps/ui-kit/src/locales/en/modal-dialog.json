@@ -40,6 +40,7 @@
       "description": "What happens when you open a modal inside an overflow: hidden container? Without Portal, the modal gets clipped.",
       "hint": "Click both buttons to compare the difference with and without Portal",
       "insight": "Floating UI elements (modals, tooltips, dropdowns) must escape the DOM hierarchy. React Portal solves this.",
+      "clippedNote": "Without Portal, the modal gets clipped inside this area.",
       "withoutPortal": "Without Portal",
       "withPortal": "With Portal",
       "modalTitle": "Portal Test",

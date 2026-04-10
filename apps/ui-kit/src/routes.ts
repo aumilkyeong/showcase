@@ -12,4 +12,9 @@ export const componentRoutes: RouteEntry[] = [
     label: 'Autocomplete',
     component: lazy(() => import('./pages/autocomplete/AutocompletePage')),
   },
+  {
+    path: 'dropdown-menu',
+    label: 'Dropdown Menu',
+    component: lazy(() => import('./pages/dropdown-menu/DropdownMenuPage')),
+  },
 ];

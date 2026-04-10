@@ -1,0 +1,169 @@
+{
+  "hero": {
+    "overline": "Component",
+    "title": "Modal Dialog",
+    "subtitle": "모달을 열고 닫으며, 각 단계에 담긴 설계 의도를 발견해보세요."
+  },
+  "closeLabel": "다이얼로그 닫기",
+  "insight": "Design Point",
+  "steps": {
+    "basic": {
+      "title": "제어 vs 비제어",
+      "description": "모달을 여는 두 가지 방식입니다. 제어 모드는 부모가 isOpen 상태를 직접 관리하고, 비제어 모드는 Trigger 클릭으로 모달이 자체 상태를 토글합니다.",
+      "hint": "두 버튼을 각각 눌러 모달을 열어보세요",
+      "insight": "API 응답이나 타이머 등 외부 이벤트로 모달을 열어야 한다면 제어 모드, 단순 버튼 토글이면 비제어 모드가 적합합니다.",
+      "controlledLabel": "제어 모드 (Controlled)",
+      "uncontrolledLabel": "비제어 모드 (Uncontrolled)",
+      "openControlled": "모달 열기 (제어)",
+      "openUncontrolled": "모달 열기",
+      "close": "닫기",
+      "confirm": "확인",
+      "controlledTitle": "제어 모달",
+      "controlledBody": "부모 컴포넌트가 isOpen과 onClose를 직접 관리합니다.",
+      "uncontrolledTitle": "비제어 모달",
+      "uncontrolledBody": "Trigger를 클릭하면 모달이 자체적으로 열리고 닫힙니다."
+    },
+    "composition": {
+      "title": "왜 합성 컴포넌트인가",
+      "description": "Props로 모든 것을 전달하는 단일 컴포넌트와, 역할별로 나눈 합성 컴포넌트를 비교합니다.",
+      "hint": "합성 컴포넌트 데모를 직접 조작해보세요",
+      "insight": "합성 패턴은 슬롯별 자유로운 커스터마이징을 허용하면서도 Context로 내부 상태를 공유합니다.",
+      "singleLabel": "단일 컴포넌트 (Props)",
+      "compoundLabel": "합성 컴포넌트 (Composition)",
+      "openModal": "모달 열기",
+      "close": "닫기",
+      "confirm": "확인",
+      "modalTitle": "합성 컴포넌트 모달",
+      "body": "Header, Body, Footer를 자유롭게 조합할 수 있습니다."
+    },
+    "portal": {
+      "title": "Portal 렌더링",
+      "description": "overflow: hidden 컨테이너 안에서 모달을 열면 어떻게 될까요? Portal 없이는 모달이 잘립니다.",
+      "hint": "두 버튼을 눌러 Portal 유무 차이를 비교해보세요",
+      "insight": "모달, 툴팁, 드롭다운 등 떠 있는 UI는 반드시 DOM 계층을 탈출해야 합니다. React Portal이 이를 해결합니다.",
+      "clippedNote": "Portal 없이는 모달이 이 영역에 갇힙니다.",
+      "withoutPortal": "Portal 없이",
+      "withPortal": "Portal 사용",
+      "modalTitle": "Portal 테스트",
+      "body": "이 모달이 잘리지 않고 보이나요?"
+    },
+    "focusTrap": {
+      "title": "포커스 트랩",
+      "description": "모달이 열리면 포커스가 내부에 갇힙니다. Tab과 Shift+Tab으로 순환하며, 모달 밖으로 탈출하지 않습니다.",
+      "hint": "모달을 열고 Tab 키로 포커스를 돌려보세요",
+      "insight": "포커스 트랩 4단계 — 이전 포커스 저장 → 첫 요소로 이동 → Tab 루프 → 닫힘 시 복원. 스크린 리더 사용자에게 필수적인 접근성 패턴입니다.",
+      "open": "포커스 트랩 모달 열기",
+      "modalTitle": "포커스 트랩",
+      "name": "이름",
+      "email": "이메일",
+      "cancel": "취소",
+      "submit": "제출",
+      "focusIndicator": "현재 포커스"
+    },
+    "animation": {
+      "title": "애니메이션 분리",
+      "description": "오버레이(페이드인)와 본문(슬라이드업)이 독립 애니메이션을 가집니다. 부모-자식 구조에서는 opacity가 전파되어 망가집니다.",
+      "hint": "두 방식을 토글하여 애니메이션 차이를 비교해보세요",
+      "insight": "오버레이와 본문이 부모-자식이면 부모의 opacity가 자식에 전파되어 애니메이션이 망가집니다. 형제(Sibling) 분리가 핵심입니다.",
+      "siblingLabel": "형제 구조 (정상)",
+      "nestedLabel": "부모-자식 구조 (결함)",
+      "open": "모달 열기",
+      "modalTitle": "애니메이션 테스트",
+      "body": "오버레이 페이드와 본문 슬라이드가 독립적으로 동작하는지 확인하세요."
+    },
+    "nativeDialog": {
+      "title": "네이티브 <dialog> 비교",
+      "description": "HTML5 <dialog> 태그와 커스텀 모달을 나란히 비교합니다. Tab 키로 포커스를 돌려보면 네이티브 dialog에서는 포커스가 밖으로 탈출합니다.",
+      "hint": "각 모달에서 Tab 키로 포커스 트랩 차이를 체험해보세요",
+      "insight": "네이티브 <dialog>는 showModal() 한 줄로 열리지만, 포커스 트랩이 불완전하여 실무에서는 여전히 JS 보완이 필요합니다.",
+      "customLabel": "커스텀 모달",
+      "nativeLabel": "네이티브 <dialog>",
+      "openCustom": "커스텀 모달 열기",
+      "openNative": "네이티브 dialog 열기",
+      "modalTitle": "포커스 비교",
+      "input1": "입력 1",
+      "input2": "입력 2",
+      "close": "닫기"
+    },
+    "stacked": {
+      "title": "다중 중첩 모달",
+      "description": "모달 위에 모달을 중첩할 수 있습니다. ESC를 누르면 최상단 하나만 닫히는 스택(LIFO) 동작을 시연합니다.",
+      "hint": "모달 안에서 또 다른 모달을 열어보세요",
+      "insight": "모달 스택을 모듈 레벨에서 관리하여 ESC 이벤트가 최상단 모달에만 도달하도록 합니다.",
+      "open": "첫 번째 모달 열기",
+      "title1": "모달 1단계",
+      "body1": "이 모달 위에 또 다른 모달을 열 수 있습니다.",
+      "openNext": "다음 모달 열기",
+      "title2": "모달 2단계",
+      "body2": "ESC를 누르면 이 모달만 닫힙니다.",
+      "title3": "모달 3단계",
+      "body3": "최상단 모달입니다. ESC로 하나씩 닫아보세요.",
+      "close": "닫기",
+      "stackDepth": "현재 깊이: {{depth}}"
+    },
+    "keyboard": {
+      "title": "키보드 내비게이션",
+      "description": "모든 인터랙션이 키보드만으로 가능합니다.",
+      "hint": "모달을 열고 키보드만으로 조작해보세요",
+      "insight": "Tab/Shift+Tab은 포커스를 순환시키고, ESC는 모달을 즉시 닫습니다. 마우스 없는 사용자도 동등한 경험을 합니다.",
+      "open": "모달 열기",
+      "modalTitle": "키보드 테스트",
+      "body": "Tab, Shift+Tab, ESC 키로 모달을 조작해보세요.",
+      "cancel": "취소",
+      "confirm": "확인",
+      "keys": {
+        "tab": "다음 포커스 요소로 이동",
+        "shiftTab": "이전 포커스 요소로 이동",
+        "escape": "모달 닫기"
+      }
+    },
+    "a11y": {
+      "title": "접근성 (ARIA)",
+      "description": "WAI-ARIA Dialog 패턴을 준수합니다. 스크린 리더 사용자도 동일한 경험을 할 수 있습니다.",
+      "insight": "role=\"dialog\"와 aria-modal=\"true\"는 설계 초기부터 자리잡아야 합니다. aria-labelledby와 aria-describedby로 스크린 리더가 모달의 제목과 내용을 읽을 수 있습니다.",
+      "headers": {
+        "attribute": "속성",
+        "element": "요소",
+        "role": "용도"
+      },
+      "modalContainer": "모달 컨테이너",
+      "attrs": {
+        "dialog": "다이얼로그 역할을 선언합니다",
+        "modal": "모달 모드임을 스크린 리더에 전달합니다",
+        "labelledby": "Header 타이틀과 연결하여 모달 제목을 읽습니다",
+        "describedby": "Body 콘텐츠와 연결하여 모달 설명을 읽습니다"
+      }
+    }
+  },
+  "api": {
+    "title": "API Reference",
+    "sections": {
+      "root": "ModalDialog",
+      "trigger": "ModalDialog.Trigger",
+      "header": "ModalDialog.Header",
+      "body": "ModalDialog.Body",
+      "footer": "ModalDialog.Footer"
+    },
+    "headers": {
+      "prop": "Prop",
+      "type": "타입",
+      "default": "기본값",
+      "description": "설명"
+    },
+    "descriptions": {
+      "children": "하위 컴포넌트",
+      "isOpen": "제어 모드: 열림/닫힘 상태",
+      "defaultOpen": "비제어 모드: 초기 열림 상태",
+      "onClose": "닫기 콜백 (제어 모드 필수)",
+      "closeOnOverlayClick": "오버레이 클릭 시 닫기 여부",
+      "closeOnEsc": "ESC 키로 닫기 여부",
+      "width": "모달 너비",
+      "maxHeight": "모달 최대 높이",
+      "triggerChildren": "트리거 요소 (클릭 시 모달 열기)",
+      "headerChildren": "타이틀 콘텐츠",
+      "showCloseButton": "X 닫기 버튼 표시 여부",
+      "bodyChildren": "본문 콘텐츠",
+      "footerChildren": "액션 버튼 영역"
+    }
+  }
+}

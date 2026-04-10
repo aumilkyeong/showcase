@@ -1,4 +1,4 @@
-import { useState, useCallback, useId, useRef } from 'react';
+import { useState, useCallback, useId, useRef, useEffect } from 'react';
 
 export interface UseModalDialogOptions {
   isOpen?: boolean;
@@ -7,6 +7,11 @@ export interface UseModalDialogOptions {
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
 }
+
+const modalStack: string[] = [];
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function useModalDialog({
   isOpen: isOpenProp,
@@ -37,8 +42,96 @@ export function useModalDialog({
       onClose?.();
     } else {
       setInternalOpen(false);
+      onClose?.();
     }
   }, [isControlled, onClose]);
+
+  // Effect 1: Focus management + scroll lock + stack registration
+  useEffect(() => {
+    if (!isOpen) return;
+
+    previousFocusRef.current = document.activeElement as HTMLElement;
+    modalStack.push(id);
+    document.body.style.overflow = 'hidden';
+
+    const timer = setTimeout(() => {
+      const container = containerRef.current;
+      if (container) {
+        const focusable = container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+        if (focusable.length > 0) {
+          focusable[0].focus();
+        }
+      }
+    }, 0);
+
+    return () => {
+      clearTimeout(timer);
+      const idx = modalStack.indexOf(id);
+      if (idx !== -1) {
+        modalStack.splice(idx, 1);
+      }
+      if (modalStack.length === 0) {
+        document.body.style.overflow = '';
+      }
+      previousFocusRef.current?.focus();
+    };
+  }, [isOpen, id]);
+
+  // Effect 2: ESC key handler
+  useEffect(() => {
+    if (!isOpen || !closeOnEsc) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        const topModal = modalStack[modalStack.length - 1];
+        if (topModal === id) {
+          handleClose();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, closeOnEsc, id, handleClose]);
+
+  // Effect 3: Focus trap (Tab/Shift+Tab loop)
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      const container = containerRef.current;
+      if (!container) return;
+
+      const focusable = Array.from(
+        container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   return {
     isOpen,

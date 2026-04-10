@@ -47,3 +47,33 @@ test('generates unique titleId and bodyId', () => {
   expect(result.current.bodyId).toBeTruthy();
   expect(result.current.titleId).not.toBe(result.current.bodyId);
 });
+
+test('closeOnEsc default is true', () => {
+  const { result } = renderHook(() => useModalDialog({}));
+  expect(result.current.closeOnEsc).toBe(true);
+});
+
+test('closeOnOverlayClick default is true', () => {
+  const { result } = renderHook(() => useModalDialog({}));
+  expect(result.current.closeOnOverlayClick).toBe(true);
+});
+
+test('closeOnEsc=false overrides default', () => {
+  const { result } = renderHook(() => useModalDialog({ closeOnEsc: false }));
+  expect(result.current.closeOnEsc).toBe(false);
+});
+
+test('closeOnOverlayClick=false overrides default', () => {
+  const { result } = renderHook(() => useModalDialog({ closeOnOverlayClick: false }));
+  expect(result.current.closeOnOverlayClick).toBe(false);
+});
+
+test('containerRef starts as null', () => {
+  const { result } = renderHook(() => useModalDialog({}));
+  expect(result.current.containerRef.current).toBeNull();
+});
+
+test('previousFocusRef starts as null', () => {
+  const { result } = renderHook(() => useModalDialog({}));
+  expect(result.current.previousFocusRef.current).toBeNull();
+});

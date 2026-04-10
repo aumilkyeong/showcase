@@ -7,7 +7,6 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import ReactDOM from 'react-dom';
@@ -27,49 +26,37 @@ interface ModalDialogRootProps extends UseModalDialogOptions {
   children: ReactNode;
   width?: CSSProperties['width'];
   maxHeight?: CSSProperties['maxHeight'];
+  className?: string;
 }
 
 function ModalDialogRoot({
   children,
   width,
   maxHeight,
+  className,
   ...options
 }: ModalDialogRootProps) {
   const state = useModalDialog(options);
   const [shouldRender, setShouldRender] = useState(state.isOpen);
   const [animateOpen, setAnimateOpen] = useState(false);
-  const exitTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   // Animation: enter/exit transitions
   useEffect(() => {
     if (state.isOpen) {
       setShouldRender(true);
-      // Double rAF to ensure DOM is painted before animating
-      const raf1 = requestAnimationFrame(() => {
-        const raf2 = requestAnimationFrame(() => {
-          setAnimateOpen(true);
+      let cancelled = false;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!cancelled) setAnimateOpen(true);
         });
-        // Store raf2 for cleanup
-        rafRef2.current = raf2;
       });
-      rafRef1.current = raf1;
-      return () => {
-        cancelAnimationFrame(rafRef1.current);
-        cancelAnimationFrame(rafRef2.current);
-      };
+      return () => { cancelled = true; };
     } else {
       setAnimateOpen(false);
-      exitTimerRef.current = setTimeout(() => {
-        setShouldRender(false);
-      }, 200);
-      return () => {
-        clearTimeout(exitTimerRef.current);
-      };
+      const timer = setTimeout(() => setShouldRender(false), 200);
+      return () => clearTimeout(timer);
     }
   }, [state.isOpen]);
-
-  const rafRef1 = useRef<number>(0);
-  const rafRef2 = useRef<number>(0);
 
   const handleOverlayClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -134,7 +121,7 @@ function ModalDialogRoot({
                 aria-modal="true"
                 aria-labelledby={state.titleId}
                 aria-describedby={state.bodyId}
-                className={`${styles.container} ${animateOpen ? styles.containerOpen : ''}`}
+                className={`${styles.container} ${animateOpen ? styles.containerOpen : ''} ${className ?? ''}`}
                 style={
                   Object.keys(containerStyle).length > 0
                     ? containerStyle
@@ -177,13 +164,14 @@ function Trigger({ children }: TriggerProps) {
 interface HeaderProps {
   children: ReactNode;
   showCloseButton?: boolean;
+  className?: string;
 }
 
-function Header({ children, showCloseButton = true }: HeaderProps) {
+function Header({ children, showCloseButton = true, className }: HeaderProps) {
   const ctx = useModalDialogContext();
 
   return (
-    <div className={styles.header}>
+    <div className={`${styles.header} ${className ?? ''}`}>
       <h2 id={ctx.titleId} className={styles.headerTitle}>
         {children}
       </h2>
@@ -205,13 +193,14 @@ function Header({ children, showCloseButton = true }: HeaderProps) {
 
 interface BodyProps {
   children: ReactNode;
+  className?: string;
 }
 
-function Body({ children }: BodyProps) {
+function Body({ children, className }: BodyProps) {
   const ctx = useModalDialogContext();
 
   return (
-    <div id={ctx.bodyId} className={styles.body}>
+    <div id={ctx.bodyId} className={`${styles.body} ${className ?? ''}`}>
       {children}
     </div>
   );
@@ -221,10 +210,11 @@ function Body({ children }: BodyProps) {
 
 interface FooterProps {
   children: ReactNode;
+  className?: string;
 }
 
-function Footer({ children }: FooterProps) {
-  return <div className={styles.footer}>{children}</div>;
+function Footer({ children, className }: FooterProps) {
+  return <div className={`${styles.footer} ${className ?? ''}`}>{children}</div>;
 }
 
 /* ─── Export ─────────────────────────────────────────────────────────── */

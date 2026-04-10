@@ -1,7 +1,16 @@
 import { useState, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ModalDialog } from '@/components/modal-dialog';
+import { ModalDialog, useModalDialogContext } from '@/components/modal-dialog';
 import styles from './ModalDialogPage.module.css';
+
+function CloseButton({ label }: { label: string }) {
+  const ctx = useModalDialogContext();
+  return (
+    <button className={styles.demoButton} onClick={ctx.handleClose}>
+      {label}
+    </button>
+  );
+}
 
 /* ─── Step 01: Controlled vs Uncontrolled ──────────────────────────── */
 
@@ -50,7 +59,7 @@ function BasicDemo() {
           <ModalDialog.Header>{t('steps.basic.uncontrolledTitle')}</ModalDialog.Header>
           <ModalDialog.Body>{t('steps.basic.uncontrolledBody')}</ModalDialog.Body>
           <ModalDialog.Footer>
-            <button className={styles.demoButton}>{t('steps.basic.close')}</button>
+            <CloseButton label={t('steps.basic.close')} />
           </ModalDialog.Footer>
         </ModalDialog>
       </div>

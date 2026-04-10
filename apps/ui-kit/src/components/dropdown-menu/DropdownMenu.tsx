@@ -8,8 +8,10 @@ import {
   useState,
 } from 'react';
 import ReactDOM from 'react-dom';
-import { DropdownMenuContext } from './DropdownMenuContext';
-import { useDropdownMenuContext } from './DropdownMenuContext';
+import {
+  DropdownMenuContext,
+  useDropdownMenuContext,
+} from './DropdownMenuContext';
 import { useDropdownMenu } from './useDropdownMenu';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import styles from './DropdownMenu.module.css';

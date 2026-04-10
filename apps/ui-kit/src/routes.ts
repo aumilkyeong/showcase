@@ -17,4 +17,9 @@ export const componentRoutes: RouteEntry[] = [
     label: 'Dropdown Menu',
     component: lazy(() => import('./pages/dropdown-menu/DropdownMenuPage')),
   },
+  {
+    path: 'image-carousel',
+    label: 'Image Carousel',
+    component: lazy(() => import('./pages/image-carousel/ImageCarouselPage')),
+  },
 ];

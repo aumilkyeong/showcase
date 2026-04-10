@@ -59,8 +59,9 @@ export function useModalDialog({
       const container = containerRef.current;
       if (container) {
         const focusable = container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
-        if (focusable.length > 0) {
-          focusable[0].focus();
+        const firstFocusable = focusable[0];
+        if (focusable.length > 0 && firstFocusable) {
+          firstFocusable.focus();
         }
       }
     }, 0);
@@ -122,12 +123,12 @@ export function useModalDialog({
       if (e.shiftKey) {
         if (document.activeElement === first) {
           e.preventDefault();
-          last.focus();
+          if (last) last.focus();
         }
       } else {
         if (document.activeElement === last) {
           e.preventDefault();
-          first.focus();
+          if (first) first.focus();
         }
       }
     };

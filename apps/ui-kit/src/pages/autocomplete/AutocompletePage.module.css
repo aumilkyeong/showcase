@@ -1,0 +1,232 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* Hero */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.overline {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2.52px;
+  text-transform: uppercase;
+  color: #00d992;
+  margin: 0;
+}
+
+.title {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.11;
+  letter-spacing: -0.9px;
+  color: #f2f2f2;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #8b949e;
+  margin: 4px 0 0;
+  line-height: 1.65;
+  max-width: 520px;
+}
+
+/* Step */
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 24px;
+  border-left: 1px solid #3d3a39;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepNumber {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00d992;
+  background-color: rgba(0, 217, 146, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.stepTitle {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.33;
+  letter-spacing: -0.6px;
+  color: #f2f2f2;
+  margin: 0;
+}
+
+.stepDescription {
+  font-size: 15px;
+  color: #b8b3b0;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Demo */
+
+.demo {
+  padding: 24px;
+  border: 1px solid #3d3a39;
+  border-radius: 8px;
+  background-color: #101010;
+  max-width: 400px;
+  box-shadow: rgba(92, 88, 85, 0.2) 0px 0px 15px;
+}
+
+.hint {
+  font-size: 13px;
+  font-weight: 500;
+  color: #00d992;
+  margin: 0 0 12px;
+  letter-spacing: 0.2px;
+}
+
+/* Insight */
+
+.insight {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: rgba(0, 217, 146, 0.04);
+  border: 1px solid rgba(0, 217, 146, 0.12);
+  border-radius: 6px;
+  max-width: 520px;
+}
+
+.insightLabel {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #00d992;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.insightText {
+  font-size: 14px;
+  color: #b8b3b0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Keyboard */
+
+.kbdList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.kbdItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #8b949e;
+}
+
+.kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  background-color: #101010;
+  border: 1px solid #3d3a39;
+  border-radius: 4px;
+  min-width: 28px;
+  text-align: center;
+  color: #f2f2f2;
+}
+
+/* Table */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #3d3a39;
+  font-size: 14px;
+  color: #b8b3b0;
+}
+
+.table th {
+  font-weight: 600;
+  color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table code {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 13px;
+  background-color: rgba(0, 217, 146, 0.08);
+  color: #2fd6a1;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Reference */
+
+.reference {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 32px;
+  border-top: 1px solid #3d3a39;
+}
+
+.referenceTitle {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+  color: #8b949e;
+  margin: 0;
+}
+
+/* Rich item */
+
+.richItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.richItemEmoji {
+  font-size: 20px;
+}

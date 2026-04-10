@@ -1,0 +1,86 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #050507;
+}
+
+.sidebar {
+  width: 240px;
+  padding: 24px 16px;
+  border-right: 1px solid #3d3a39;
+  background-color: #101010;
+  flex-shrink: 0;
+}
+
+.sidebarTitle {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: #00d992;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navLink {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #b8b3b0;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f2f2f2;
+}
+
+.navLinkActive {
+  background-color: rgba(0, 217, 146, 0.1);
+  color: #00d992;
+  font-weight: 600;
+}
+
+.main {
+  flex: 1;
+  padding: 32px 48px;
+  max-width: 960px;
+}
+
+.localeSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.localeLink {
+  text-decoration: none;
+  color: #8b949e;
+  font-weight: 400;
+  transition: color 0.15s;
+}
+
+.localeLink:hover {
+  color: #00d992;
+}
+
+.localeLinkActive {
+  color: #2fd6a1;
+  font-weight: 700;
+}
+
+.localeDivider {
+  color: #3d3a39;
+}

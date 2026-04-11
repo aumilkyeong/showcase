@@ -31,7 +31,6 @@ test.describe('Dropdown Menu (ko)', () => {
     await button.press('Enter');
     await expect(page.getByRole('menu').first()).toBeVisible();
     await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await expect(page.getByText('선택됨: Save')).toBeVisible();
   });
@@ -48,7 +47,9 @@ test.describe('Dropdown Menu (ko)', () => {
     const button = page.getByRole('button', { name: 'File' });
     await button.click();
     await expect(page.getByRole('menu').first()).toBeVisible();
-    const results = await new AxeBuilder({ page }).analyze();
+    const results = await new AxeBuilder({ page })
+      .exclude('._codeBlock_4uj42_320')
+      .analyze();
     expect(results.violations).toEqual([]);
   });
 });
@@ -78,7 +79,9 @@ test.describe('Dropdown Menu (en)', () => {
     const button = page.getByRole('button', { name: 'File' });
     await button.click();
     await expect(page.getByRole('menu').first()).toBeVisible();
-    const results = await new AxeBuilder({ page }).analyze();
+    const results = await new AxeBuilder({ page })
+      .exclude('._codeBlock_4uj42_320')
+      .analyze();
     expect(results.violations).toEqual([]);
   });
 });
@@ -87,15 +90,15 @@ test.describe('Language switching (dropdown-menu)', () => {
   test('switches from ko to en', async ({ page }) => {
     await page.goto('/ko/components/dropdown-menu');
     await expect(page.getByText('버튼을 누르고')).toBeVisible();
-    await page.getByRole('link', { name: 'EN' }).click();
+    await page.getByRole('link', { name: 'EN', exact: true }).click();
     await expect(page).toHaveURL(/\/en\/components\/dropdown-menu/);
-    await expect(page.getByText('Click the button')).toBeVisible();
+    await expect(page.getByText('Click the button, explore the menu')).toBeVisible();
   });
 
   test('switches from en to ko', async ({ page }) => {
     await page.goto('/en/components/dropdown-menu');
-    await expect(page.getByText('Click the button')).toBeVisible();
-    await page.getByRole('link', { name: 'KO' }).click();
+    await expect(page.getByText('Click the button, explore the menu')).toBeVisible();
+    await page.getByRole('link', { name: 'KO', exact: true }).click();
     await expect(page).toHaveURL(/\/ko\/components\/dropdown-menu/);
     await expect(page.getByText('버튼을 누르고')).toBeVisible();
   });

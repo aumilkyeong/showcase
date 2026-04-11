@@ -8,6 +8,7 @@ dist/
 *.tsbuildinfo
 *.d.ts.map
 vite.config.d.ts
+test-results/
 .claude/
 .playwright-mcp/
 docs/

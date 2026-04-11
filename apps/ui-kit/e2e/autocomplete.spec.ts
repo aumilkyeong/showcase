@@ -99,7 +99,7 @@ test.describe('Language switching', () => {
     await page.goto('/ko/components/autocomplete');
     await expect(page.getByPlaceholder('과일 검색...')).toBeVisible();
 
-    await page.getByRole('link', { name: 'EN' }).click();
+    await page.getByRole('link', { name: 'EN', exact: true }).click();
 
     await expect(page).toHaveURL(/\/en\/components\/autocomplete/);
     await expect(page.getByPlaceholder('Search fruits...')).toBeVisible();
@@ -109,7 +109,7 @@ test.describe('Language switching', () => {
     await page.goto('/en/components/autocomplete');
     await expect(page.getByPlaceholder('Search fruits...')).toBeVisible();
 
-    await page.getByRole('link', { name: 'KO' }).click();
+    await page.getByRole('link', { name: 'KO', exact: true }).click();
 
     await expect(page).toHaveURL(/\/ko\/components\/autocomplete/);
     await expect(page.getByPlaceholder('과일 검색...')).toBeVisible();

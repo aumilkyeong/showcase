@@ -74,7 +74,7 @@ test.describe('Language switching (modal-dialog)', () => {
   test('switches from ko to en', async ({ page }) => {
     await page.goto('/ko/components/modal-dialog');
     await expect(page.getByText('모달을 열고 닫으며')).toBeVisible();
-    await page.getByRole('link', { name: 'EN' }).click();
+    await page.getByRole('link', { name: 'EN', exact: true }).click();
     await expect(page).toHaveURL(/\/en\/components\/modal-dialog/);
     await expect(page.getByText('Open and close modals')).toBeVisible();
   });
@@ -82,7 +82,7 @@ test.describe('Language switching (modal-dialog)', () => {
   test('switches from en to ko', async ({ page }) => {
     await page.goto('/en/components/modal-dialog');
     await expect(page.getByText('Open and close modals')).toBeVisible();
-    await page.getByRole('link', { name: 'KO' }).click();
+    await page.getByRole('link', { name: 'KO', exact: true }).click();
     await expect(page).toHaveURL(/\/ko\/components\/modal-dialog/);
     await expect(page.getByText('모달을 열고 닫으며')).toBeVisible();
   });

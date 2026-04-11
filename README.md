@@ -38,6 +38,7 @@ showcase/
 | Autocomplete | 제네릭 콤보박스 - 로컬/비동기 필터링, 디바운스, 키보드 내비게이션, WAI-ARIA 컴플라이언스 | Done |
 | Dropdown Menu | 합성 컴포넌트 패턴 기반 드롭다운 메뉴 - Relative/Portal 렌더링 전략, 키보드 내비게이션, WAI-ARIA Menu Button 패턴 | Done |
 | Image Carousel | 이미지 캐러셀 - Flux 패턴 상태 관리, Intent 기반 3단계 프리로딩, Autoplay, 반응형 이미지(srcSet), WAI-ARIA Carousel 패턴 | Done |
+| Modal Dialog | 모달 다이얼로그 - 합성 컴포넌트 패턴, Portal 렌더링, Focus Trap, 모달 스택(LIFO), 애니메이션 분리, WAI-ARIA Dialog 패턴 | Done |
 
 ## Getting Started
 
@@ -92,6 +93,7 @@ pnpm format:check
 - `/:locale/components/autocomplete` - Autocomplete 데모 페이지
 - `/:locale/components/dropdown-menu` - Dropdown Menu 데모 페이지
 - `/:locale/components/image-carousel` - Image Carousel 데모 페이지
+- `/:locale/components/modal-dialog` - Modal Dialog 데모 페이지
 
 ## License
 
